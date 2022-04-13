@@ -1,7 +1,17 @@
 import { createGlobalStyle } from "styled-components";
-import Login from "Login";
+import styled from "styled-components";
+import Login from "Components/Login";
+import Admin from "Components/Admin";
+import Nav from "Components/Nav";
 import React from "react";
-import Admin from "components/Admin";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { LoginState } from "atoms";
+import User from "Components/User";
+import Category from "Components/Category";
+import Item from "Components/Item";
+import Report from "Components/Report";
+import Support from "Components/Support";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -65,13 +75,54 @@ a {
   color:inherit;
 }
 `;
+const AdminDiv = styled.div`
+  flex-direction: row;
+  display: flex;
+`;
 
 function App() {
+  const isLogin = useRecoilValue(LoginState);
   return (
     <>
-      <GlobalStyle />
-      <Login />
-      {/* <Admin /> */}
+      <Router>
+        <Routes>
+          {isLogin ? (
+            <Route path="/" element={<Admin />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin" element={<Admin />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin/user" element={<User />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin/item" element={<Item />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin/support" element={<Support />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin/report" element={<Report />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+          {isLogin ? (
+            <Route path="/admin/category" element={<Category />}></Route>
+          ) : (
+            <Route path="/" element={<Login />}></Route>
+          )}
+        </Routes>
+      </Router>
     </>
   );
 }

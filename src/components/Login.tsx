@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useForm, useFormState } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { IDState, PASSState } from "./atoms";
+import { IDState, PASSState } from "../atoms";
 import React from "react";
 
 const BodyStyle = styled.div`

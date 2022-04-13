@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { useForm, useFormState } from "react-hook-form";
 import { Link, Route } from "react-router-dom";
+import Nav from "./Nav";
+import UserDetail from "./Detail/UserDetail";
+
+const AdminDiv = styled.div`
+  flex-direction: row;
+  display: flex;
+`;
 
 const UserList = styled.div`
   width: 55%;
@@ -34,18 +41,23 @@ const SearchButton = styled.button`
   outline: none;
 `;
 
-function Admin_user() {
+function User() {
   const { register, handleSubmit } = useForm();
   const onValid = (data: any) => {
     console.log(data);
   };
   return (
-    <UserList>
-      <UserSearch onSubmit={handleSubmit(onValid)}>
-        <SearchBar {...register("USER")} placeholder="Search for..." />
-        <SearchButton>🔍</SearchButton>
-      </UserSearch>
-    </UserList>
+    <AdminDiv>
+      <Nav />
+      <UserList>
+        <UserSearch onSubmit={handleSubmit(onValid)}>
+          <SearchBar {...register("USER")} placeholder="Search for..." />
+          <SearchButton>🔍</SearchButton>
+        </UserSearch>
+      </UserList>
+      <UserDetail />
+    </AdminDiv>
   );
 }
-export default Admin_user;
+
+export default User;
