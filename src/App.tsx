@@ -1,13 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import Login from "Login";
 import React from "react";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import Admin from "components/Admin";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -75,10 +69,9 @@ a {
 function App() {
   return (
     <>
-      <RecoilRoot>
-        <GlobalStyle />
-        <Login />
-      </RecoilRoot>
+      <GlobalStyle />
+      <Login />
+      {/* <Admin /> */}
     </>
   );
 }
