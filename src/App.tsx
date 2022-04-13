@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 import Login from "Components/Login";
-import Admin from "Components/Admin";
 import Nav from "Components/Nav";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -87,12 +86,12 @@ function App() {
       <Router>
         <Routes>
           {isLogin ? (
-            <Route path="/" element={<Admin />}></Route>
+            <Route path="/" element={<User />}></Route>
           ) : (
             <Route path="/" element={<Login />}></Route>
           )}
           {isLogin ? (
-            <Route path="/admin" element={<Admin />}></Route>
+            <Route path="/admin" element={<User />}></Route>
           ) : (
             <Route path="/" element={<Login />}></Route>
           )}

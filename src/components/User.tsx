@@ -3,6 +3,9 @@ import { useForm, useFormState } from "react-hook-form";
 import { Link, Route } from "react-router-dom";
 import Nav from "./Nav";
 import UserDetail from "./Detail/UserDetail";
+import ItemDetail from "./Detail/ItemDetail";
+import { useRecoilValue } from "recoil";
+import { ItemDetailState, UserDetailState } from "atoms";
 
 const AdminDiv = styled.div`
   flex-direction: row;
@@ -12,7 +15,7 @@ const AdminDiv = styled.div`
 const UserList = styled.div`
   width: 55%;
   display: flex;
-  min-width: 600px;
+  min-width: 500px;
   background-color: lightcoral;
 `;
 
@@ -42,6 +45,8 @@ const SearchButton = styled.button`
 `;
 
 function User() {
+  const isUserDetail = useRecoilValue(UserDetailState);
+  const isItemDetail = useRecoilValue(ItemDetailState);
   const { register, handleSubmit } = useForm();
   const onValid = (data: any) => {
     console.log(data);
@@ -55,7 +60,8 @@ function User() {
           <SearchButton>🔍</SearchButton>
         </UserSearch>
       </UserList>
-      <UserDetail />
+      {isUserDetail ? <UserDetail /> : <div></div>}
+      {isItemDetail ? <ItemDetail /> : <div></div>}
     </AdminDiv>
   );
 }
