@@ -5,13 +5,13 @@ export const PASSState = atom({ key: "PASSWORD", default: [] });
 
 export const LoginState = atom({ key: "isLogin", default: true });
 
-export const DetailState = atom({ key: "selectDetail", default: false });
+export const DetailState = atom({ key: "selectDetail", default: true });
 
 export const UserDetailState = atom({
   key: "selectUserDetail",
-  default: true,
+  default: false,
 });
 export const ItemDetailState = atom({
   key: "selectItemDetail",
-  default: false,
+  default: true,
 });

@@ -55,19 +55,32 @@ const ListElement = styled.li`
   max-width: 600px;
   border-radius: 15px;
 `;
-
 const SearchBar = styled.input`
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   background-color: #efefef;
-  height: 30px;
   border: none;
   outline: none;
   border-radius: 20px;
   padding-left: 10px;
   margin-right: 10px;
 `;
-const SearchOptionSelect = styled.select``;
+const SearchBox = styled.div`
+  background-color: #efefef;
+  border-radius: 20px;
+  width: 60%;
+  height: 30px;
+  display: flex;
+`;
+
+const SearchOptionSelect = styled.select`
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  background-color: #efefef;
+  margin-right: 10px;
+`;
 const SerchOption = styled.option``;
 
 const SearchButton = styled.button`
@@ -96,13 +109,15 @@ function Item() {
     <AdminDiv>
       <ItemList>
         <ItemSearch onSubmit={onSubmit}>
-          <SearchBar onChange={onChange} placeholder="Search for..." />
-          <SearchOptionSelect>
-            <SerchOption>카테고리</SerchOption>
-            <SerchOption>이름</SerchOption>
-            <SerchOption>소유자</SerchOption>
-            <SerchOption>실소유자</SerchOption>
-          </SearchOptionSelect>
+          <SearchBox>
+            <SearchBar onChange={onChange} placeholder="Search for..." />
+            <SearchOptionSelect>
+              <SerchOption>카테고리</SerchOption>
+              <SerchOption>이름</SerchOption>
+              <SerchOption>소유자</SerchOption>
+              <SerchOption>실소유자</SerchOption>
+            </SearchOptionSelect>
+          </SearchBox>
           <SearchButton>
             <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} />
           </SearchButton>
