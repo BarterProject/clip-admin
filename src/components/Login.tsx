@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import { useForm, useFormState } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { IDState, PASSState } from "../atoms";
-import React from "react";
+import React, { useState } from "react";
 
 const BodyStyle = styled.div`
   background-color: #373966;
@@ -57,36 +54,32 @@ const SubmitButton = styled.button`
 `;
 
 function Login() {
-  interface IForm {
-    ID: string;
-    PASSWORD: String;
-  }
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<IForm>();
-  const onValid = (data: any) => {
-    console.log(data);
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const onChangeID = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    setId(value);
+  };
+  const onChangePW = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    setPw(value);
+  };
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(id);
+    console.log(pw);
   };
   return (
     <BodyStyle>
       <LoginBox>
         <TitleText>CLIP</TitleText>
-        <LoginForm onSubmit={handleSubmit(onValid)}>
-          <InputText
-            {...register("ID", { required: "ID를 입력해주세요" })}
-            placeholder="ID"
-          />
-          <span>{errors?.ID?.message}</span>
-          <InputText
-            {...register("PASSWORD", {
-              required: "비밀번호를 입력해주세요",
-            })}
-            placeholder="PASSWORD"
-          />
-          {/* <span>{errors?.PASSWORD?.message}</span> */}
+        <LoginForm onSubmit={onSubmit}>
+          <InputText onChange={onChangeID} value={id} placeholder="ID" />
+          <InputText onChange={onChangePW} value={pw} placeholder="PASSWORD" />
           <SubmitButton>Login</SubmitButton>
         </LoginForm>
       </LoginBox>

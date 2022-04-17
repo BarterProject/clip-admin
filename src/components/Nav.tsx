@@ -3,11 +3,15 @@ import { LoginState } from "atoms";
 import { useRecoilValue } from "recoil";
 import Login from "./Login";
 import styled from "styled-components";
-import Category from "./Category";
-import Item from "./Item";
-import Report from "./Report";
-import Support from "./Support";
-import User from "./User";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserGear,
+  faUser,
+  faBarcode,
+  faPhone,
+  faAddressCard,
+  faFolder,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NavStyle = styled.div`
   width: 20%;
@@ -32,13 +36,15 @@ const AdminProfile = styled.div`
   width: 250px;
 `;
 
-const AdminImg = styled.img`
+const AdminImg = styled.div`
+  background-color: white;
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: 50px;
-  margin-bottom: 15px;
-  align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  margin: auto;
 `;
 const AdminName = styled.span`
   color: white;
@@ -66,13 +72,15 @@ const CategoryName = styled(Link)`
   }
   color: white;
   font-size: 25px;
+  margin-left: 10px;
 `;
 
-const CategoryIcon = styled.img`
+const CategoryIcon = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50px;
 `;
+
 function Nav() {
   const isLogin = useRecoilValue(LoginState);
   return (
@@ -81,29 +89,31 @@ function Nav() {
         <div>
           <NavStyle>
             <AdminProfile>
-              <AdminImg src="img/icons8-user-90.png" />
+              <AdminImg>
+                <FontAwesomeIcon size="4x" icon={faUserGear} />
+              </AdminImg>
               <AdminName>Admin</AdminName>
             </AdminProfile>
             <AdminCategiryList>
               <AdminCategory>
-                <CategoryIcon src="img/icons8-user-48.png" />
-                <CategoryName to="/admin/user">USER</CategoryName>
+                <FontAwesomeIcon size="2x" icon={faUser} color="#fff" />
+                <CategoryName to="/user">USER</CategoryName>
               </AdminCategory>
               <AdminCategory>
-                <CategoryIcon src="img/icons8-barcode-50.png" />
-                <CategoryName to="/admin/item">ITEM</CategoryName>
+                <FontAwesomeIcon size="2x" icon={faBarcode} color="#fff" />
+                <CategoryName to="/item">ITEM</CategoryName>
               </AdminCategory>
               <AdminCategory>
-                <CategoryIcon src="src\components\img\icons8-phone-50.png" />
-                <CategoryName to="/admin/support">SUPPORT</CategoryName>
+                <FontAwesomeIcon size="2x" icon={faPhone} color="#fff" />
+                <CategoryName to="/support">SUPPORT</CategoryName>
               </AdminCategory>
               <AdminCategory>
-                <CategoryIcon src="src\components\img\icons8-report-card-60.png" />
-                <CategoryName to="/admin/report">REPORT</CategoryName>
+                <FontAwesomeIcon size="2x" icon={faAddressCard} color="#fff" />
+                <CategoryName to="/report">REPORT</CategoryName>
               </AdminCategory>
               <AdminCategory>
-                <CategoryIcon src="src\components\img\icons8-docket-64.png" />
-                <CategoryName to="/admin/category">CATEGORY</CategoryName>
+                <FontAwesomeIcon size="2x" icon={faFolder} color="#fff" />
+                <CategoryName to="/category">CATEGORY</CategoryName>
               </AdminCategory>
             </AdminCategiryList>
           </NavStyle>

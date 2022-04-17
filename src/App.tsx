@@ -1,16 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
-import Login from "Components/Login";
-import Nav from "Components/Nav";
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { LoginState } from "atoms";
-import User from "Components/User";
-import Category from "Components/Category";
-import Item from "Components/Item";
-import Report from "Components/Report";
-import Support from "Components/Support";
+import Auth from "layout/Auth";
+import Default from "layout/Default";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -81,49 +74,8 @@ const AdminDiv = styled.div`
 
 function App() {
   const isLogin = useRecoilValue(LoginState);
-  return (
-    <>
-      <Router>
-        <Routes>
-          {isLogin ? (
-            <Route path="/" element={<User />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin" element={<User />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin/user" element={<User />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin/item" element={<Item />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin/support" element={<Support />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin/report" element={<Report />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-          {isLogin ? (
-            <Route path="/admin/category" element={<Category />}></Route>
-          ) : (
-            <Route path="/" element={<Login />}></Route>
-          )}
-        </Routes>
-      </Router>
-    </>
-  );
+  <GlobalStyle />;
+  return <AdminDiv>{isLogin ? <Default /> : <Auth />}</AdminDiv>;
 }
 
 export default App;
