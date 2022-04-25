@@ -5,7 +5,7 @@ export const PASSState = atom({ key: "PASSWORD", default: [] });
 
 export const LoginState = atom({ key: "isLogin", default: false });
 
-export const DetailState = atom({ key: "selectDetail", default: true });
+export const DetailState = atom({ key: "selectDetail", default: false });
 
 export const UserDetailState = atom({
   key: "selectUserDetail",
@@ -13,5 +13,5 @@ export const UserDetailState = atom({
 });
 export const ItemDetailState = atom({
   key: "selectItemDetail",
-  default: true,
+  default: false,
 });

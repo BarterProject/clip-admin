@@ -1,54 +1,16 @@
 import styled from "styled-components";
-const DetailBox = styled.div`
-  width: 35%;
-  display: flex;
-  min-width: 400px;
-  flex-wrap: wrap;
-  flex-direction: column;
-`;
-const Profile = styled.div`
-  display: flex;
-  margin: 30px 0 30px 30px;
-`;
-const ProfileImg = styled.img`
-  width: 80px;
-  height: 80px;
-`;
-const ProfileName = styled.span`
-  text-align: center;
-  align-self: center;
-  font-size: 30px;
-  margin-left: 20px;
-`;
-const SmallDetailBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 13px 0 13px 0;
-`;
-const DetailName = styled.span`
-  margin-left: 15px;
-  font-size: 18px;
-`;
-const DetailText = styled.div`
-  width: 200px;
-  background-color: #e6edf4;
-  border-radius: 5px;
-  margin-right: 15px;
-`;
-const DetailBoxFrame = styled.div`
-  flex-direction: column;
-  display: flex;
-`;
-const SaveBtn = styled.button`
-  width: 100px;
-  height: 40px;
-  margin-top: 30px;
-`;
-const BtnBox = styled.div`
-  align-self: flex-end;
-  margin-right: 15px;
-`;
+import {
+  DetailBox,
+  Profile,
+  ProfileImg,
+  ProfileName,
+  DetailBoxFrame,
+  SmallDetailBox,
+  DetailName,
+  DetailText,
+  BtnBox,
+  Btn,
+} from "../../Components/DetailForm";
 
 function ItemDetail() {
   return (
@@ -88,8 +50,8 @@ function ItemDetail() {
           <ProfileImg />
         </SmallDetailBox>
         <BtnBox>
-          <SaveBtn>내용 수정</SaveBtn>
-          <SaveBtn>제품 삭제</SaveBtn>
+          <Btn>내용 수정</Btn>
+          <Btn>제품 삭제</Btn>
         </BtnBox>
       </DetailBoxFrame>
     </DetailBox>

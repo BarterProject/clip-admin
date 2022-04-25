@@ -1,7 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { LoginState } from "atoms";
-import { useRecoilValue } from "recoil";
-import Login from "../page/Login";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -38,14 +35,19 @@ const AdminProfile = styled.div`
 
 const AdminImg = styled.div`
   background-color: white;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50px;
   justify-content: center;
   align-content: center;
   text-align: center;
   margin: auto;
 `;
+
+const TransformImg = styled.div`
+  transform: translate(3%, 15%);
+`;
+
 const AdminName = styled.span`
   color: white;
   font-size: 22px;
@@ -82,46 +84,39 @@ const CategoryIcon = styled.div`
 `;
 
 function Nav() {
-  const isLogin = useRecoilValue(LoginState);
   return (
-    <div>
-      {isLogin ? (
-        <div>
-          <NavStyle>
-            <AdminProfile>
-              <AdminImg>
-                <FontAwesomeIcon size="4x" icon={faUserGear} />
-              </AdminImg>
-              <AdminName>Admin</AdminName>
-            </AdminProfile>
-            <AdminCategiryList>
-              <AdminCategory>
-                <FontAwesomeIcon size="2x" icon={faUser} color="#fff" />
-                <CategoryName to="/user">USER</CategoryName>
-              </AdminCategory>
-              <AdminCategory>
-                <FontAwesomeIcon size="2x" icon={faBarcode} color="#fff" />
-                <CategoryName to="/item">ITEM</CategoryName>
-              </AdminCategory>
-              <AdminCategory>
-                <FontAwesomeIcon size="2x" icon={faPhone} color="#fff" />
-                <CategoryName to="/support">SUPPORT</CategoryName>
-              </AdminCategory>
-              <AdminCategory>
-                <FontAwesomeIcon size="2x" icon={faAddressCard} color="#fff" />
-                <CategoryName to="/report">REPORT</CategoryName>
-              </AdminCategory>
-              <AdminCategory>
-                <FontAwesomeIcon size="2x" icon={faFolder} color="#fff" />
-                <CategoryName to="/category">CATEGORY</CategoryName>
-              </AdminCategory>
-            </AdminCategiryList>
-          </NavStyle>
-        </div>
-      ) : (
-        <Route path="/" element={<Login />}></Route>
-      )}
-    </div>
+    <NavStyle>
+      <AdminProfile>
+        <AdminImg>
+          <TransformImg>
+            <FontAwesomeIcon size="3x" icon={faUserGear} />
+          </TransformImg>
+        </AdminImg>
+        <AdminName>Admin</AdminName>
+      </AdminProfile>
+      <AdminCategiryList>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faUser} color="#fff" />
+          <CategoryName to="/user">USER</CategoryName>
+        </AdminCategory>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faBarcode} color="#fff" />
+          <CategoryName to="/item">ITEM</CategoryName>
+        </AdminCategory>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faPhone} color="#fff" />
+          <CategoryName to="/support">SUPPORT</CategoryName>
+        </AdminCategory>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faAddressCard} color="#fff" />
+          <CategoryName to="/report">REPORT</CategoryName>
+        </AdminCategory>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faFolder} color="#fff" />
+          <CategoryName to="/category">CATEGORY</CategoryName>
+        </AdminCategory>
+      </AdminCategiryList>
+    </NavStyle>
   );
 }
 

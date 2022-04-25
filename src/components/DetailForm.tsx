@@ -1,0 +1,65 @@
+import styled from "styled-components";
+
+export const DetailBox = styled.div`
+  width: 35%;
+  display: flex;
+  min-width: 400px;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;
+export const Profile = styled.div`
+  display: flex;
+  margin: 30px 0 30px 30px;
+`;
+export const ProfileImg = styled.img`
+  width: 80px;
+  height: 80px;
+`;
+export const ProfileName = styled.span`
+  text-align: center;
+  align-self: center;
+  font-size: 30px;
+  margin-left: 20px;
+`;
+export const SmallDetailBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 13px 0 13px 0;
+`;
+export const DetailName = styled.span`
+  margin-left: 15px;
+  font-size: 18px;
+`;
+export const DetailText = styled.div`
+  width: 200px;
+  background-color: #e6edf4;
+  border-radius: 5px;
+  margin-right: 15px;
+`;
+export const DetailBoxFrame = styled.div`
+  flex-direction: column;
+  display: flex;
+`;
+export const Btn = styled.button`
+  width: 100px;
+  height: 40px;
+  margin-top: 30px;
+`;
+export const SubmitBtn = styled.button`
+  width: 100px;
+  height: 40px;
+  margin-top: 30px;
+  align-self: flex-end;
+`;
+export const MoreBtn = styled.button`
+  width: 100px;
+  height: 40px;
+  align-self: flex-end;
+  margin-top: 30px;
+`;
+
+export const BtnBox = styled.div`
+  align-self: flex-end;
+  margin-right: 15px;
+`;

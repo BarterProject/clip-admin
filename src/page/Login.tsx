@@ -4,10 +4,6 @@ import { useSetRecoilState } from "recoil";
 import { authApi } from "api";
 import { LoginState } from "atoms";
 
-interface ILogin {
-  isLogin: boolean;
-}
-
 const BodyStyle = styled.div`
   background-color: #373966;
   height: 100vh;
