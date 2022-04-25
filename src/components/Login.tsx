@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { authApi } from "api";
+import { LoginState } from "atoms";
+
+interface ILogin {
+  isLogin: boolean;
+}
 
 const BodyStyle = styled.div`
   background-color: #373966;
@@ -68,10 +75,21 @@ function Login() {
     } = event;
     setPw(value);
   };
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const isLogined = useSetRecoilState(LoginState);
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(id);
+
+    try {
+      const { data } = await authApi.login(id, pw);
+      window.localStorage.setItem("jwt", data.jwt);
+      isLogined((pre: boolean) => !pre);
+    } catch (e) {
+      console.log(e);
+    }
+
+    /*     console.log(id);
     console.log(pw);
+    console.log(data); */
   };
   return (
     <BodyStyle>

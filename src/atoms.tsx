@@ -3,7 +3,7 @@ import { atom } from "recoil";
 export const IDState = atom({ key: "ID", default: [] });
 export const PASSState = atom({ key: "PASSWORD", default: [] });
 
-export const LoginState = atom({ key: "isLogin", default: true });
+export const LoginState = atom({ key: "isLogin", default: false });
 
 export const DetailState = atom({ key: "selectDetail", default: true });
 

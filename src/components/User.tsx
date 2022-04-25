@@ -3,9 +3,10 @@ import UserDetail from "./Detail/UserDetail";
 import ItemDetail from "./Detail/ItemDetail";
 import { useRecoilValue } from "recoil";
 import { ItemDetailState, UserDetailState } from "atoms";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { userApi } from "../api/index";
 
 const AdminDiv = styled.div`
   width: 100vw;
@@ -80,6 +81,18 @@ function User() {
   const isItemDetail = useRecoilValue(ItemDetailState);
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
+  const getUserList = async () => {
+    try {
+      const { data } = await userApi.getUserList();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUserList();
+  }, []);
   /* function pageAlgo(
     total: number,
     bottomSize: number,
@@ -137,7 +150,7 @@ function User() {
             <ListElementName>닉네임</ListElementName>
           </ListElementNameBox>
           {array.map((ele) => (
-            <ListElement>{ele}</ListElement>
+            <ListElement key={ele}>{ele}</ListElement>
           ))}
         </SearchList>
       </UserList>
