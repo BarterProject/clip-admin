@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DetailBox = styled.div`
   width: 35%;
   display: flex;
-  min-width: 400px;
+  min-width: 300px;
   flex-wrap: wrap;
   flex-direction: column;
 `;
@@ -47,10 +47,15 @@ export const Btn = styled.button`
   margin-top: 30px;
 `;
 export const SubmitBtn = styled.button`
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   margin-top: 30px;
   align-self: flex-end;
+  background-color: #5196ff;
+  color: white;
+  border: none;
+  outline-color: aliceblue;
+  border-radius: 5px;
 `;
 export const MoreBtn = styled.button`
   width: 100px;

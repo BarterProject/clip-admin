@@ -50,7 +50,7 @@ export const SearchBox = styled.div`
   background-color: #efefef;
   border-radius: 20px;
   width: 60%;
-  height: 30px;
+  height: 32px;
   display: flex;
 `;
 export const SerchOption = styled.option``;

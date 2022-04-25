@@ -12,7 +12,7 @@ export const PageName = styled.span`
 `;
 
 export const ListDiv = styled.div`
-  width: 75%;
+  width: 65%;
   display: flex;
   min-width: 500px;
   flex-direction: column;

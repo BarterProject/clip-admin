@@ -10,6 +10,7 @@ import {
   DetailText,
   BtnBox,
   Btn,
+  SubmitBtn,
 } from "../../Components/DetailForm";
 
 function ItemDetail() {
@@ -50,7 +51,7 @@ function ItemDetail() {
           <ProfileImg />
         </SmallDetailBox>
         <BtnBox>
-          <Btn>내용 수정</Btn>
+          <SubmitBtn>내용 수정</SubmitBtn>
           <Btn>제품 삭제</Btn>
         </BtnBox>
       </DetailBoxFrame>

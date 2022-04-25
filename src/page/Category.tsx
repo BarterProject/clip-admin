@@ -10,7 +10,8 @@ import {
   SearchBox,
   SearchForm,
 } from "Components/SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { catApi } from "api";
 
 function Category() {
   const [search, setSearch] = useState("");
@@ -24,6 +25,14 @@ function Category() {
     event.preventDefault();
     console.log(search);
   };
+  const [catData, setCatData] = useState();
+  useEffect(() => {
+    const datas = catApi.getCatList().then((categoryData) => {
+      return console.log(categoryData.data.name);
+    });
+
+    console.log(datas);
+  }, []);
   return (
     <AdminDiv>
       <PageName>카테고리</PageName>
@@ -39,6 +48,9 @@ function Category() {
         <SearchButton>
           <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} />
         </SearchButton>
+        {/* {catData.map((cat: any) => (
+          <span key="catname">{cat}</span>
+        ))} */}
       </SearchForm>
     </AdminDiv>
   );
