@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SupportDetail from "./Detail/SupportDetail";
+import SupportDetail from "page/Detail/SupportDetail";
 import { DetailState } from "atoms";
 import { useRecoilValue } from "recoil";
 

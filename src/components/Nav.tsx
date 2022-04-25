@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { LoginState } from "atoms";
 import { useRecoilValue } from "recoil";
-import Login from "./Login";
+import Login from "../page/Login";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

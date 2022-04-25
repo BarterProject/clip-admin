@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import User from "Components/User";
-import Category from "Components/Category";
-import Item from "Components/Item";
-import Report from "Components/Report";
-import Support from "Components/Support";
+import User from "page/User";
+import Category from "page/Category";
+import Item from "page/Item";
+import Report from "page/Report";
+import Support from "page/Support";
 import Nav from "Components/Nav";
 
 function Default() {

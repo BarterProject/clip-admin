@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import UserDetail from "./Detail/UserDetail";
-import ItemDetail from "./Detail/ItemDetail";
+import UserDetail from "page/Detail/UserDetail";
+import ItemDetail from "page/Detail/ItemDetail";
 import { useRecoilValue } from "recoil";
 import { ItemDetailState, UserDetailState } from "atoms";
 import { useEffect, useState } from "react";
