@@ -7,11 +7,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { userApi } from "../api/index";
-import {
-  ListBox,
-  ListElementName,
-  ListElementNameBox,
-} from "../Components/List";
+import List from "../Components/List";
 import {
   SearchBar,
   SearchButton,
@@ -25,7 +21,6 @@ function User() {
   const isItemDetail = useRecoilValue(ItemDetailState);
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const getUserList = async () => {
     try {
@@ -46,15 +41,11 @@ function User() {
     const {
       currentTarget: { value },
     } = event;
-    setSearch(value); //<?
+    setSearch(value);
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(search);
-  };
-  const onDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    onUserDetailState((pre) => !pre);
   };
   return (
     <AdminDiv>
@@ -66,15 +57,7 @@ function User() {
           </SearchButton>
         </SearchForm>
         <SearchList>
-          <ListElementNameBox>
-            <ListElementName>ID</ListElementName>
-            <ListElementName>닉네임</ListElementName>
-          </ListElementNameBox>
-          {array.map((ele) => (
-            <ListBox onClick={onDetail} key={ele}>
-              {ele}
-            </ListBox>
-          ))}
+          <List currentName="user" />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

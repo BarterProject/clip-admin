@@ -15,7 +15,7 @@ import {
   SerchOption,
   SearchForm,
 } from "Components/SearchBar";
-import { ListElementNameBox, ListElementName, ListBox } from "Components/List";
+import List from "Components/List";
 import { AdminDiv, ListDiv } from "Components/FormalForm";
 
 function Item() {
@@ -23,7 +23,6 @@ function Item() {
   const isItemDetail = useRecoilValue(ItemDetailState);
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   useEffect(() => {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
@@ -38,10 +37,6 @@ function Item() {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(search);
-  };
-  const onDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    onItemDetailState((pre) => !pre);
   };
 
   return (
@@ -62,14 +57,7 @@ function Item() {
           </SearchButton>
         </SearchForm>
         <SearchList>
-          <ListElementNameBox>
-            <ListElementName>ID</ListElementName>
-            <ListElementName>제품명</ListElementName>
-            <ListElementName>현소유자</ListElementName>
-          </ListElementNameBox>
-          {array.map((ele) => (
-            <ListBox onClick={onDetail}>{ele}</ListBox>
-          ))}
+          <List currentName="item" />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

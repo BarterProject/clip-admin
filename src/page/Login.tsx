@@ -102,3 +102,6 @@ function Login() {
 }
 
 export default Login;
+function LoginSelector(LoginSelector: any) {
+  throw new Error("Function not implemented.");
+}

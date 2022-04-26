@@ -11,7 +11,7 @@ import {
   SearchForm,
 } from "Components/SearchBar";
 import { useEffect, useState } from "react";
-import { catApi } from "api";
+import { categoryApi } from "api";
 
 function Category() {
   const [search, setSearch] = useState("");
@@ -25,25 +25,25 @@ function Category() {
     event.preventDefault();
     console.log(search);
   };
-  const [catData, setCatData] = useState();
-  useEffect(() => {
-    const datas = catApi.getCatList().then((categoryData) => {
-      return console.log(categoryData.data.name);
-    });
 
-    console.log(datas);
+  const getCategoryData = async () => {
+    try {
+      const { data } = await categoryApi.getCategoryList();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getCategoryData();
   }, []);
+
   return (
     <AdminDiv>
       <PageName>카테고리</PageName>
       <SearchForm onSubmit={onSubmit}>
         <SearchBox>
           <SearchBar onChange={onChange} placeholder="Search for..." />
-          <SearchOptionSelect>
-            <SerchOption>전자기기</SerchOption>
-            <SerchOption>잡화</SerchOption>
-            <SerchOption>식품</SerchOption>
-          </SearchOptionSelect>
         </SearchBox>
         <SearchButton>
           <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} />
