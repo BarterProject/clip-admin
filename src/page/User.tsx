@@ -34,7 +34,7 @@ function User() {
   useEffect(() => {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
-    //getUserList();
+    getUserList();
   }, []);
   const [search, setSearch] = useState("");
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
