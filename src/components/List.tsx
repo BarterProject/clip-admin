@@ -92,7 +92,7 @@ function List({ currentName }: IProps) {
             <ListElementName>작성자</ListElementName>
           </ListElementNameBox>
           {array.map((ele) => (
-            <ListBox onClick={onUserDetail} key={ele}>
+            <ListBox onClick={onDetail} key={ele}>
               {ele}
             </ListBox>
           ))}

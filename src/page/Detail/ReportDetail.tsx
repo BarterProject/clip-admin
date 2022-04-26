@@ -22,10 +22,6 @@ function ReportDetail() {
           <DetailText>웅냐</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
-          <DetailName>신고자</DetailName>
-          <DetailText>웅냐</DetailText>
-        </SmallDetailBox>
-        <SmallDetailBox>
           <DetailName>내용</DetailName>
           <DetailText>웅냐</DetailText>
         </SmallDetailBox>
