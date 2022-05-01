@@ -7,7 +7,11 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { userApi } from "../api/index";
-import List from "../Components/List";
+import {
+  ListBox,
+  ListElementName,
+  ListElementNameBox,
+} from "../Components/List";
 import {
   SearchBar,
   SearchButton,
@@ -21,22 +25,35 @@ function User() {
   const isItemDetail = useRecoilValue(ItemDetailState);
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
+  const [userData, setUserData] = useState([]);
+
+  const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onUserDetailState((pre) => !pre);
+  };
+
+  const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onItemDetailState((pre) => !pre);
+  };
 
   const getUserList = async () => {
     try {
       const { data } = await userApi.getUserList();
-      console.log(data);
+      setUserData(data.users);
+      console.log(data.users);
     } catch (e) {
       console.log(e);
     }
   };
-
   useEffect(() => {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
     getUserList();
   }, []);
+
   const [search, setSearch] = useState("");
+
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
@@ -57,7 +74,14 @@ function User() {
           </SearchButton>
         </SearchForm>
         <SearchList>
-          <List currentName="user" />
+          <ListElementNameBox>
+            <ListElementName>이메일</ListElementName>
+          </ListElementNameBox>
+          {userData.map((Data: any) => (
+            <ListBox key="email" onClick={onUserDetail}>
+              {Data.email}
+            </ListBox>
+          ))}
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

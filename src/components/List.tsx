@@ -5,7 +5,7 @@ import styled from "styled-components";
 interface IProps {
   currentName: String;
 }
-const ListBox = styled.button`
+export const ListBox = styled.button`
   width: 90%;
   border: none;
   outline: none;
@@ -16,11 +16,11 @@ const ListBox = styled.button`
   max-width: 600px;
   border-radius: 15px;
 `;
-const ListElementName = styled.span`
+export const ListElementName = styled.span`
   margin: 0 90px 0 30px;
   height: 30px;
 `;
-const ListElementNameBox = styled.div`
+export const ListElementNameBox = styled.div`
   display: flex;
 `;
 

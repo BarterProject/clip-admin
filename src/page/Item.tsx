@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { itemApi } from "../api/index";
 import {
   SearchBar,
   SearchBox,
@@ -15,18 +16,46 @@ import {
   SerchOption,
   SearchForm,
 } from "Components/SearchBar";
-import List from "Components/List";
-import { AdminDiv, ListDiv } from "Components/FormalForm";
+import List, {
+  ListBox,
+  ListElementName,
+  ListElementNameBox,
+} from "Components/List";
+import { AdminDiv, ElementText, ListDiv } from "Components/FormalForm";
 
 function Item() {
   const isUserDetail = useRecoilValue(UserDetailState);
   const isItemDetail = useRecoilValue(ItemDetailState);
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
+
+  const [itemData, setItemData] = useState([]);
+
+  const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onUserDetailState((pre) => !pre);
+  };
+
+  const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onItemDetailState((pre) => !pre);
+  };
+
+  const getItemList = async () => {
+    try {
+      const { data } = await itemApi.getItemList();
+      setItemData(data);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
+    getItemList();
   }, []);
+
   const [search, setSearch] = useState("");
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
@@ -57,7 +86,18 @@ function Item() {
           </SearchButton>
         </SearchForm>
         <SearchList>
-          <List currentName="item" />
+          <ListElementNameBox>
+            <ListElementName>ID</ListElementName>
+            <ListElementName>제품명</ListElementName>
+            <ListElementName>현소유자</ListElementName>
+          </ListElementNameBox>
+          {itemData.map((Data: any) => (
+            <ListBox key="idx" onClick={onItemDetail}>
+              <ElementText>{Data.idx}</ElementText>
+              <ElementText>{Data.name}</ElementText>
+              <ElementText>{Data.owner.email}</ElementText>
+            </ListBox>
+          ))}
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}
