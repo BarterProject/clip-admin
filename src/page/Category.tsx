@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminDiv, ListDiv, PageName } from "Components/FormalForm";
-import {
+/* import {
   SearchBar,
   SearchOptionSelect,
   SerchOption,
@@ -10,11 +10,12 @@ import {
   SearchBox,
   SearchForm,
   SearchList,
-} from "Components/SearchBar";
+} from "Components/SearchBar"; */
 import { useEffect, useState } from "react";
-import { categoryApi } from "api";
+import { categoryApi, saveCategoryApi } from "api";
 import { BtnBox } from "Components/DetailForm";
 
+const NewCategoryInput = styled.input``;
 const ListBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,22 +37,40 @@ const Btn = styled.button`
 function Category() {
   const [categoryData, setCategoryData] = useState([]);
   const [search, setSearch] = useState("");
+  const [newCategoryName, setNewCategoryName] = useState("");
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
     } = event;
     setSearch(value);
   };
+
+  const onNewCategoryNameChange = (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    setNewCategoryName(value);
+  };
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(search);
+  };
+  const saveNewCategory = async () => {
+    try {
+      const { data } = await saveCategoryApi.setCategory(newCategoryName);
+      console.log(Response);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const getCategoryData = async () => {
     try {
       const { data } = await categoryApi.getCategoryList();
       setCategoryData(data);
       console.log(data);
-      console.log(categoryData);
     } catch (e) {
       console.log(e);
     }
@@ -72,13 +91,18 @@ function Category() {
           </SearchButton>
         </SearchForm> */}
         <ListBox>
-          {categoryData &&
-            categoryData.map((Data: any) => (
-              <CategoryBox key="name">{Data.name}</CategoryBox>
-            ))}
+          {categoryData.map((Data: any, idx: number) => (
+            <CategoryBox key={idx}>{Data.name}</CategoryBox>
+          ))}
         </ListBox>
+
         <BtnBox>
-          <Btn>삭제</Btn> <Btn>저장</Btn>
+          <NewCategoryInput
+            placeholder="만들 카테고리 이름 적는 란"
+            onChange={onNewCategoryNameChange}
+          ></NewCategoryInput>
+          <Btn onSubmit={saveNewCategory}>저장</Btn>
+          <Btn>삭제</Btn>
         </BtnBox>
       </ListDiv>
     </AdminDiv>

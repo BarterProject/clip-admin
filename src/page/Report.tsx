@@ -27,7 +27,7 @@ function Report() {
     try {
       const { data } = await reportApi.getReportList();
       setReportData(data.reports);
-      console.log(reportData);
+      console.log(data.reports);
     } catch (e) {
       console.log(e);
     }
@@ -55,8 +55,8 @@ function Report() {
             <ListElementName>제목</ListElementName>
             <ListElementName>작성자</ListElementName>
           </ListElementNameBox>
-          {reportData.map((Data: any) => (
-            <ListBox onClick={onDetail} key="idx">
+          {reportData.map((Data: any, idx: number) => (
+            <ListBox onClick={onDetail} key={idx}>
               <ElementText>{Data.title}</ElementText>
               <ElementText>{Data.user.email}</ElementText>
             </ListBox>

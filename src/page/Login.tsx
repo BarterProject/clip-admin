@@ -82,10 +82,6 @@ function Login() {
     } catch (e) {
       console.log(e);
     }
-
-    /*     console.log(id);
-    console.log(pw);
-    console.log(data); */
   };
   return (
     <BodyStyle>
@@ -102,6 +98,3 @@ function Login() {
 }
 
 export default Login;
-function LoginSelector(LoginSelector: any) {
-  throw new Error("Function not implemented.");
-}

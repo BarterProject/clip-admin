@@ -91,8 +91,8 @@ function Item() {
             <ListElementName>제품명</ListElementName>
             <ListElementName>현소유자</ListElementName>
           </ListElementNameBox>
-          {itemData.map((Data: any) => (
-            <ListBox key="idx" onClick={onItemDetail}>
+          {itemData.map((Data: any, idx: number) => (
+            <ListBox key={idx} onClick={onItemDetail}>
               <ElementText>{Data.idx}</ElementText>
               <ElementText>{Data.name}</ElementText>
               <ElementText>{Data.owner.email}</ElementText>

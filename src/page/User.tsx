@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import UserDetail from "page/Detail/UserDetail";
 import ItemDetail from "page/Detail/ItemDetail";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -77,8 +76,8 @@ function User() {
           <ListElementNameBox>
             <ListElementName>이메일</ListElementName>
           </ListElementNameBox>
-          {userData.map((Data: any) => (
-            <ListBox key="email" onClick={onUserDetail}>
+          {userData.map((Data: any, idx: number) => (
+            <ListBox key={idx} onClick={onUserDetail}>
               {Data.email}
             </ListBox>
           ))}
