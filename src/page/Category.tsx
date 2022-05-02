@@ -12,7 +12,7 @@ import { AdminDiv, ListDiv, PageName } from "Components/FormalForm";
   SearchList,
 } from "Components/SearchBar"; */
 import { useEffect, useState } from "react";
-import { categoryApi, saveCategoryApi } from "api";
+import { categoryApi, deleteCategoryApi, saveCategoryApi } from "api";
 import { BtnBox } from "Components/DetailForm";
 
 const NewCategoryInput = styled.input``;
@@ -28,6 +28,12 @@ const CategoryBox = styled.button`
   border-color: #999898;
   outline: none;
   margin: 10px;
+  &:active {
+    background-color: #e6007e;
+  }
+  &:focus {
+    background-color: #e6007e;
+  }
 `;
 
 const Btn = styled.button`
@@ -35,6 +41,7 @@ const Btn = styled.button`
 `;
 
 function Category() {
+  const [selectedBtn, setSelectedBtn] = useState(0);
   const [categoryData, setCategoryData] = useState([]);
   const [search, setSearch] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -44,13 +51,14 @@ function Category() {
     } = event;
     setSearch(value);
   };
-
+  //new category name input state
   const onNewCategoryNameChange = (
     event: React.FormEvent<HTMLInputElement>
   ) => {
     const {
       currentTarget: { value },
     } = event;
+    console.log(value);
     setNewCategoryName(value);
   };
 
@@ -58,14 +66,31 @@ function Category() {
     event.preventDefault();
     console.log(search);
   };
+  //save new category api
   const saveNewCategory = async () => {
     try {
       const { data } = await saveCategoryApi.setCategory(newCategoryName);
-      console.log(Response);
+      console.log(data);
     } catch (e) {
       console.log(e);
     }
   };
+  const categoryBtnOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setSelectedBtn(parseInt((event.target as HTMLButtonElement).value));
+    console.log(event.target);
+    console.log((event.target as HTMLButtonElement).value);
+  };
+
+  const deleteCategory = async () => {
+    try {
+      const { data } = await deleteCategoryApi.delCategory(selectedBtn);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //get category data
   const getCategoryData = async () => {
     try {
       const { data } = await categoryApi.getCategoryList();
@@ -78,6 +103,7 @@ function Category() {
   useEffect(() => {
     getCategoryData();
   }, []);
+
   return (
     <AdminDiv>
       <ListDiv>
@@ -92,7 +118,9 @@ function Category() {
         </SearchForm> */}
         <ListBox>
           {categoryData.map((Data: any, idx: number) => (
-            <CategoryBox key={idx}>{Data.name}</CategoryBox>
+            <CategoryBox key={idx} value={idx} onClick={categoryBtnOnClick}>
+              {Data.name}
+            </CategoryBox>
           ))}
         </ListBox>
 
@@ -101,8 +129,8 @@ function Category() {
             placeholder="만들 카테고리 이름 적는 란"
             onChange={onNewCategoryNameChange}
           ></NewCategoryInput>
-          <Btn onSubmit={saveNewCategory}>저장</Btn>
-          <Btn>삭제</Btn>
+          <Btn onClick={saveNewCategory}>저장</Btn>
+          <Btn onClick={saveNewCategory}>삭제</Btn>
         </BtnBox>
       </ListDiv>
     </AdminDiv>
