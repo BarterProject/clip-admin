@@ -21,7 +21,3 @@ export const ElementText = styled.span`
   width: 33%;
   margin-right: 30px;
 `;
-
-export const PagingBox = styled.div``;
-
-export const PagingBtn = styled.button``;

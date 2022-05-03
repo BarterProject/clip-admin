@@ -43,9 +43,13 @@ function Paging() {
       ) : (
         <></>
       )}
-      <PagingBtn onClick={onFirst} value={currentPage}>
-        {currentPage}
-      </PagingBtn>
+      {currentPage > 0 ? (
+        <PagingBtn onClick={onFirst} value={currentPage}>
+          {currentPage}
+        </PagingBtn>
+      ) : (
+        <></>
+      )}
       <PagingBtn onClick={onSecond} value={currentPage + 1}>
         {currentPage + 1}
       </PagingBtn>
