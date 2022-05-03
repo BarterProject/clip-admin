@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ReportDetail from "./Detail/ReportDetail";
-import { DetailState } from "atoms";
+import { DetailState, ReportDataState, selectedReportNumber } from "atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import List, {
   ListBox,
@@ -21,31 +21,32 @@ function Report() {
   const isDetail = useRecoilValue(DetailState);
   const onDetailState = useSetRecoilState(DetailState);
   const [reportData, setReportData] = useState([]);
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const selectedNumberState = useSetRecoilState(selectedReportNumber);
+  const reportDataState = useSetRecoilState(ReportDataState);
 
-  const getReportList = async () => {
-    try {
-      const { data } = await reportApi.getReportList();
-      setReportData(data.reports);
-      console.log(data.reports);
-    } catch (e) {
-      console.log(e);
-    }
-  };
   useEffect(() => {
     onDetailState((pre) => false);
     getReportList();
   }, []);
 
+  const getReportList = async () => {
+    try {
+      const { data } = await reportApi.getReportList();
+      setReportData(data.reports);
+      reportDataState(data.reports);
+      console.log(data.reports);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const onDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onDetailState((pre) => !pre);
+    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
+    console.log(event.target);
+    console.log((event.target as HTMLButtonElement).value);
   };
-
-  useEffect(() => {
-    onDetailState((pre) => false);
-  }, []);
-
   return (
     <AdminDiv>
       <ListDiv>
@@ -55,8 +56,8 @@ function Report() {
             <ListElementName>제목</ListElementName>
             <ListElementName>작성자</ListElementName>
           </ListElementNameBox>
-          {reportData.map((Data: any, idx: number) => (
-            <ListBox onClick={onDetail} key={idx}>
+          {reportData.map((Data: any) => (
+            <ListBox onClick={onDetail} key={Data.idx} value={Data.idx}>
               <ElementText>{Data.title}</ElementText>
               <ElementText>{Data.user.email}</ElementText>
             </ListBox>

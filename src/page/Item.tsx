@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import UserDetail from "./Detail/UserDetail";
 import ItemDetail from "./Detail/ItemDetail";
-import { UserDetailState, ItemDetailState } from "atoms";
+import { UserDetailState, ItemDetailState, selectedItemNumber } from "atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,8 +28,8 @@ function Item() {
   const isItemDetail = useRecoilValue(ItemDetailState);
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
-
   const [itemData, setItemData] = useState([]);
+  const selectedNumberState = useSetRecoilState(selectedItemNumber);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -39,13 +39,16 @@ function Item() {
   const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onItemDetailState((pre) => !pre);
+    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
+    console.log(event.target);
+    console.log((event.target as HTMLButtonElement).value);
   };
 
   const getItemList = async () => {
     try {
       const { data } = await itemApi.getItemList();
-      setItemData(data);
-      console.log(data);
+      setItemData(data.items);
+      console.log(data.items);
     } catch (e) {
       console.log(e);
     }
@@ -91,11 +94,12 @@ function Item() {
             <ListElementName>제품명</ListElementName>
             <ListElementName>현소유자</ListElementName>
           </ListElementNameBox>
-          {itemData.map((Data: any, idx: number) => (
-            <ListBox key={idx} onClick={onItemDetail}>
+          {itemData.map((Data: any) => (
+            <ListBox key={Data.idx} value={Data.idx} onClick={onItemDetail}>
               <ElementText>{Data.idx}</ElementText>
               <ElementText>{Data.name}</ElementText>
-              <ElementText>{Data.owner.email}</ElementText>
+              {/* 
+              <ElementText>{Data.owner.email}</ElementText> */}
             </ListBox>
           ))}
         </SearchList>

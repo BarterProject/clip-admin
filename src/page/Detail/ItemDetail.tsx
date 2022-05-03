@@ -1,4 +1,9 @@
+import { oneItemApi } from "api";
+import { selectedItemNumber } from "atoms";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+
 import {
   DetailBox,
   Profile,
@@ -14,40 +19,68 @@ import {
 } from "../../Components/DetailForm";
 
 function ItemDetail() {
+  const selectedNumber = useRecoilValue(selectedItemNumber);
+  const [oneItemData, setOneItemData] = useState();
+  const [itemNameData, setItemNameData] = useState("");
+  const [depositData, setDepositData] = useState("");
+  const [itemCategoryData, setItemCategoryData] = useState("");
+  const [ownerData, setOwner] = useState();
+  const [descriptionData, setDescription] = useState("");
+  const [stateData, setState] = useState("");
+  const [registrantData, setRegistrant] = useState();
+  const getItemInfomation = async () => {
+    try {
+      const { data } = await oneItemApi.getOneItemList(selectedNumber);
+      setOneItemData(data);
+      setItemNameData(data.name);
+      setDepositData(data.deposit);
+      setItemCategoryData(data.itemCategory.name);
+      setOwner(data.owner.email);
+      setDescription(data.description);
+      setState(data.state);
+      setRegistrant(data.registrant.email);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getItemInfomation();
+  }, []);
   return (
     <DetailBox>
       <Profile>
         <ProfileImg />
-        <ProfileName>아이폰12</ProfileName>
+        <ProfileName>{itemNameData}</ProfileName>
       </Profile>
       <DetailBoxFrame>
         <SmallDetailBox>
           <DetailName>제품명</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{itemNameData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>보증금</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{depositData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>카테고리</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{itemCategoryData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>현 아이템 소유자</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{ownerData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>설명</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{descriptionData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          <DetailText>웅냐</DetailText>
+          <DetailText>{stateData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>실 제품 소유자</DetailName>
-          <DetailName>거래가조아</DetailName>
+          <DetailName>{registrantData}</DetailName>
           <ProfileImg />
         </SmallDetailBox>
         <BtnBox>

@@ -81,7 +81,7 @@ function Category() {
     console.log(event.target);
     console.log((event.target as HTMLButtonElement).value);
   };
-
+  //delete category
   const deleteCategory = async () => {
     try {
       const { data } = await deleteCategoryApi.delCategory(selectedBtn);
@@ -117,8 +117,12 @@ function Category() {
           </SearchButton>
         </SearchForm> */}
         <ListBox>
-          {categoryData.map((Data: any, idx: number) => (
-            <CategoryBox key={idx} value={idx} onClick={categoryBtnOnClick}>
+          {categoryData.map((Data: any) => (
+            <CategoryBox
+              key={Data.idx}
+              value={Data.idx}
+              onClick={categoryBtnOnClick}
+            >
               {Data.name}
             </CategoryBox>
           ))}
@@ -130,7 +134,7 @@ function Category() {
             onChange={onNewCategoryNameChange}
           ></NewCategoryInput>
           <Btn onClick={saveNewCategory}>저장</Btn>
-          <Btn onClick={saveNewCategory}>삭제</Btn>
+          <Btn onClick={deleteCategory}>삭제</Btn>
         </BtnBox>
       </ListDiv>
     </AdminDiv>

@@ -8,18 +8,7 @@ export const PASSState = atom({ key: "PASSWORD", default: [] });
 export const LoginState = atom({
   key: "isLogin",
   default: false,
-  //effects_UNSTABLE: [persistAtom],
-});
-
-const LoginSelector = selector({
-  key: "login",
-  get: ({ get }) => {
-    const trueFalse = get(LoginState);
-    return trueFalse;
-  },
-  set: ({ set }) => {
-    set(LoginState, (prev) => !prev);
-  },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const DetailState = atom({ key: "selectDetail", default: false });
@@ -31,4 +20,18 @@ export const UserDetailState = atom({
 export const ItemDetailState = atom({
   key: "selectItemDetail",
   default: false,
+});
+export const selectedItemNumber = atom({
+  key: "selectedItemNumber",
+  default: 0,
+});
+
+export const selectedReportNumber = atom({
+  key: "selectedReportNumber",
+  default: 0,
+});
+
+export const ReportDataState = atom({
+  key: "ReportData",
+  default: [],
 });

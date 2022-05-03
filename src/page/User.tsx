@@ -25,10 +25,14 @@ function User() {
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [userData, setUserData] = useState([]);
+  const [selectedBtn, setSelectedBtn] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onUserDetailState((pre) => !pre);
+    setSelectedBtn(parseInt((event.target as HTMLButtonElement).value));
+    console.log(event.target);
+    console.log((event.target as HTMLButtonElement).value);
   };
 
   const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -63,6 +67,7 @@ function User() {
     event.preventDefault();
     console.log(search);
   };
+
   return (
     <AdminDiv>
       <ListDiv>
@@ -76,8 +81,8 @@ function User() {
           <ListElementNameBox>
             <ListElementName>이메일</ListElementName>
           </ListElementNameBox>
-          {userData.map((Data: any, idx: number) => (
-            <ListBox key={idx} onClick={onUserDetail}>
+          {userData.map((Data: any) => (
+            <ListBox key={Data.email} value={Data.email} onClick={onUserDetail}>
               {Data.email}
             </ListBox>
           ))}
