@@ -18,6 +18,7 @@ import {
   SearchList,
 } from "Components/SearchBar";
 import { AdminDiv, ListDiv } from "Components/FormalForm";
+import Paging from "Components/Paging";
 
 function User() {
   const isUserDetail = useRecoilValue(UserDetailState);
@@ -26,6 +27,7 @@ function User() {
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [userData, setUserData] = useState([]);
   const [selectedBtn, setSelectedBtn] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -42,7 +44,7 @@ function User() {
 
   const getUserList = async () => {
     try {
-      const { data } = await userApi.getUserList();
+      const { data } = await userApi.getUserList(currentPage + 1);
       setUserData(data.users);
       console.log(data.users);
     } catch (e) {
@@ -53,7 +55,7 @@ function User() {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
     getUserList();
-  }, []);
+  }, [currentPage]);
 
   const [search, setSearch] = useState("");
 
@@ -86,6 +88,7 @@ function User() {
               {Data.email}
             </ListBox>
           ))}
+          <Paging />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

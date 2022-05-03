@@ -35,3 +35,8 @@ export const ReportDataState = atom({
   key: "ReportData",
   default: [],
 });
+
+export const PageNumber = atom({
+  key: "number",
+  default: 0,
+});
