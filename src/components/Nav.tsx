@@ -104,10 +104,6 @@ function Nav() {
           <CategoryName to="/item">ITEM</CategoryName>
         </AdminCategory>
         <AdminCategory>
-          <FontAwesomeIcon size="2x" icon={faPhone} color="#fff" />
-          <CategoryName to="/support">SUPPORT</CategoryName>
-        </AdminCategory>
-        <AdminCategory>
           <FontAwesomeIcon size="2x" icon={faAddressCard} color="#fff" />
           <CategoryName to="/report">REPORT</CategoryName>
         </AdminCategory>

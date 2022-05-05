@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import UserDetail from "./Detail/UserDetail";
 import ItemDetail from "./Detail/ItemDetail";
-import { UserDetailState, ItemDetailState, selectedItemNumber } from "atoms";
+import {
+  UserDetailState,
+  ItemDetailState,
+  selectedItemNumber,
+  PageNumber,
+} from "atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,6 +27,7 @@ import List, {
   ListElementNameBox,
 } from "Components/List";
 import { AdminDiv, ElementText, ListDiv } from "Components/FormalForm";
+import Paging from "Components/Paging";
 
 function Item() {
   const isUserDetail = useRecoilValue(UserDetailState);
@@ -30,6 +36,8 @@ function Item() {
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [itemData, setItemData] = useState([]);
   const selectedNumberState = useSetRecoilState(selectedItemNumber);
+  const currentPage = useRecoilValue(PageNumber);
+  const setCurrentPage = useSetRecoilState(PageNumber);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -46,7 +54,7 @@ function Item() {
 
   const getItemList = async () => {
     try {
-      const { data } = await itemApi.getItemList();
+      const { data } = await itemApi.getItemList(currentPage + 1);
       setItemData(data.items);
       console.log(data.items);
     } catch (e) {
@@ -57,6 +65,9 @@ function Item() {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
     getItemList();
+  }, [currentPage]);
+  useEffect(() => {
+    setCurrentPage(0);
   }, []);
 
   const [search, setSearch] = useState("");
@@ -102,6 +113,7 @@ function Item() {
               <ElementText>{Data.owner.email}</ElementText> */}
             </ListBox>
           ))}
+          <Paging />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

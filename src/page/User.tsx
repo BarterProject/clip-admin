@@ -1,7 +1,12 @@
 import UserDetail from "page/Detail/UserDetail";
 import ItemDetail from "page/Detail/ItemDetail";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { ItemDetailState, UserDetailState } from "atoms";
+import {
+  ItemDetailState,
+  PageNumber,
+  UserDetailState,
+  UserTotalPage,
+} from "atoms";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -27,7 +32,9 @@ function User() {
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [userData, setUserData] = useState([]);
   const [selectedBtn, setSelectedBtn] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const currentPage = useRecoilValue(PageNumber);
+  const setCurrentPage = useSetRecoilState(PageNumber);
+  const setTotalPage = useSetRecoilState(UserTotalPage);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -56,6 +63,9 @@ function User() {
     onItemDetailState((pre) => false);
     getUserList();
   }, [currentPage]);
+  useEffect(() => {
+    setCurrentPage(0);
+  }, []);
 
   const [search, setSearch] = useState("");
 

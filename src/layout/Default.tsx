@@ -5,7 +5,6 @@ import User from "page/User";
 import Category from "page/Category";
 import Item from "page/Item";
 import Report from "page/Report";
-import Support from "page/Support";
 import Nav from "Components/Nav";
 
 function Default() {
@@ -17,7 +16,6 @@ function Default() {
           <Route path="" element={<User />}></Route>
           <Route path="/user" element={<User />}></Route>
           <Route path="/item" element={<Item />}></Route>
-          <Route path="/support" element={<Support />}></Route>
           <Route path="/report" element={<Report />}></Route>
           <Route path="/category" element={<Category />}></Route>
         </Routes>

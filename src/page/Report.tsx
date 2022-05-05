@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import ReportDetail from "./Detail/ReportDetail";
-import { DetailState, ReportDataState, selectedReportNumber } from "atoms";
+import {
+  DetailState,
+  PageNumber,
+  ReportDataState,
+  selectedReportNumber,
+} from "atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import List, {
   ListBox,
@@ -16,6 +21,7 @@ import {
 import { SearchList } from "Components/SearchBar";
 import { useEffect, useState } from "react";
 import { reportApi } from "api";
+import Paging from "Components/Paging";
 
 function Report() {
   const isDetail = useRecoilValue(DetailState);
@@ -23,15 +29,20 @@ function Report() {
   const [reportData, setReportData] = useState([]);
   const selectedNumberState = useSetRecoilState(selectedReportNumber);
   const reportDataState = useSetRecoilState(ReportDataState);
+  const currentPage = useRecoilValue(PageNumber);
+  const setCurrentPage = useSetRecoilState(PageNumber);
 
   useEffect(() => {
     onDetailState((pre) => false);
     getReportList();
+  }, [currentPage]);
+  useEffect(() => {
+    setCurrentPage(0);
   }, []);
 
   const getReportList = async () => {
     try {
-      const { data } = await reportApi.getReportList();
+      const { data } = await reportApi.getReportList(currentPage + 1);
       setReportData(data.reports);
       reportDataState(data.reports);
       console.log(data.reports);
@@ -51,7 +62,7 @@ function Report() {
     <AdminDiv>
       <ListDiv>
         <SearchList>
-          <PageName>문의사항</PageName>
+          <PageName>신고</PageName>
           <ListElementNameBox>
             <ListElementName>제목</ListElementName>
             <ListElementName>작성자</ListElementName>
@@ -62,6 +73,7 @@ function Report() {
               <ElementText>{Data.user.email}</ElementText>
             </ListBox>
           ))}
+          <Paging />
         </SearchList>
       </ListDiv>
       {isDetail ? <ReportDetail /> : <div></div>}

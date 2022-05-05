@@ -40,3 +40,16 @@ export const PageNumber = atom({
   key: "number",
   default: 0,
 });
+
+export const UserTotalPage = atom({
+  key: "number",
+  default: 1,
+});
+export const ItemTotalPage = atom({
+  key: "number",
+  default: 1,
+});
+export const ReportTotalPage = atom({
+  key: "number",
+  default: 1,
+});
