@@ -31,6 +31,7 @@ function Report() {
   const reportDataState = useSetRecoilState(ReportDataState);
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     onDetailState((pre) => false);
@@ -46,6 +47,8 @@ function Report() {
       setReportData(data.reports);
       reportDataState(data.reports);
       console.log(data.reports);
+      setTotalPage(parseInt(data.total_page));
+      console.log(parseInt(data.total_page));
     } catch (e) {
       console.log(e);
     }

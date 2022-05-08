@@ -5,10 +5,11 @@ import {
   faUserGear,
   faUser,
   faBarcode,
-  faPhone,
   faAddressCard,
   faFolder,
 } from "@fortawesome/free-solid-svg-icons";
+import { LoginState } from "atoms";
+import { useSetRecoilState } from "recoil";
 
 const NavStyle = styled.div`
   width: 20%;
@@ -21,6 +22,7 @@ const NavStyle = styled.div`
   flex-direction: column;
   min-width: 250px;
   min-height: 500px;
+  align-items: center;
 `;
 const AdminProfile = styled.div`
   display: flex;
@@ -83,7 +85,27 @@ const CategoryIcon = styled.div`
   border-radius: 50px;
 `;
 
+const LogoutBtn = styled.button`
+  border: none;
+  outline: none;
+  //background-color: #373351;
+  color: #373351;
+  margin-top: 50px;
+  height: 30px;
+  width: 100px;
+  font-size: 14px;
+  border-radius: 10px;
+`;
 function Nav() {
+  const isLogined = useSetRecoilState(LoginState);
+  const Logout = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    isLogined(false);
+    window.localStorage.removeItem("jwt");
+    window.localStorage.removeItem("recoil-persist");
+
+    //window.localStorage.clear();
+  };
   return (
     <NavStyle>
       <AdminProfile>
@@ -112,6 +134,7 @@ function Nav() {
           <CategoryName to="/category">CATEGORY</CategoryName>
         </AdminCategory>
       </AdminCategiryList>
+      <LogoutBtn onClick={Logout}>로그아웃</LogoutBtn>
     </NavStyle>
   );
 }

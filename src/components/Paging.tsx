@@ -4,12 +4,45 @@ import styled from "styled-components";
 
 const PagingBox = styled.div``;
 
-const PagingBtn = styled.button``;
+const PagingBtn = styled.button`
+  width: 50px;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  font-size: 16px;
+  color: white;
+  margin: 5px;
+`;
 
-const LeftBtn = styled.button``;
-const FirstBtn = styled.button``;
-const RightBtn = styled.button``;
-const LastBtn = styled.button``;
+const BtnOne = styled(PagingBtn)`
+  background-color: #6a76e3;
+`;
+
+const BtnTwo = styled(PagingBtn)`
+  background-color: #5f6ace;
+`;
+
+const BtnThree = styled(PagingBtn)`
+  background-color: #4f58ab;
+`;
+
+const ArrowBtn = styled.button`
+  width: 50px;
+  height: 50px;
+  border: none;
+  outline: none;
+  background-color: white;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+const LeftBtn = styled(ArrowBtn)`
+  color: #6a76e3;
+`;
+const RightBtn = styled(ArrowBtn)`
+  color: #4f58ab;
+`;
 
 function Paging() {
   const currentPage = useRecoilValue(PageNumber);
@@ -35,7 +68,7 @@ function Paging() {
     <PagingBox>
       {currentPage > 1 ? (
         <>
-          <FirstBtn onClick={() => setCurrentPage(0)}>{"<<"}</FirstBtn>
+          <LeftBtn onClick={() => setCurrentPage(0)}>{"<<"}</LeftBtn>
           <LeftBtn onClick={() => setCurrentPage(currentPage - 1)}>
             {"<"}
           </LeftBtn>
@@ -44,20 +77,20 @@ function Paging() {
         <></>
       )}
       {currentPage > 0 ? (
-        <PagingBtn onClick={onFirst} value={currentPage}>
+        <BtnOne onClick={onFirst} value={currentPage}>
           {currentPage}
-        </PagingBtn>
+        </BtnOne>
       ) : (
         <></>
       )}
-      <PagingBtn onClick={onSecond} value={currentPage + 1}>
+      <BtnTwo onClick={onSecond} value={currentPage + 1}>
         {currentPage + 1}
-      </PagingBtn>
-      <PagingBtn onClick={onThird} value={currentPage + 2}>
+      </BtnTwo>
+      <BtnThree onClick={onThird} value={currentPage + 2}>
         {currentPage + 2}
-      </PagingBtn>
+      </BtnThree>
       <RightBtn onClick={() => setCurrentPage(currentPage + 1)}>{">"}</RightBtn>
-      <LastBtn onClick={() => setCurrentPage(0)}>{">>"}</LastBtn>
+      <RightBtn onClick={() => setCurrentPage(0)}>{">>"}</RightBtn>
     </PagingBox>
   );
 }

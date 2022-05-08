@@ -4,8 +4,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ItemDetailState,
   PageNumber,
+  selectedUserNumber,
   UserDetailState,
-  UserTotalPage,
 } from "atoms";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,15 +31,15 @@ function User() {
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [userData, setUserData] = useState([]);
-  const [selectedBtn, setSelectedBtn] = useState(0);
+  const selectedNumberState = useSetRecoilState(selectedUserNumber);
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
-  const setTotalPage = useSetRecoilState(UserTotalPage);
+  const [totalPage, setTotalPage] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onUserDetailState((pre) => !pre);
-    setSelectedBtn(parseInt((event.target as HTMLButtonElement).value));
+    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
     console.log(event.target);
     console.log((event.target as HTMLButtonElement).value);
   };
@@ -54,6 +54,8 @@ function User() {
       const { data } = await userApi.getUserList(currentPage + 1);
       setUserData(data.users);
       console.log(data.users);
+      setTotalPage(parseInt(data.total_page));
+      console.log(parseInt(data.total_page));
     } catch (e) {
       console.log(e);
     }
@@ -91,10 +93,11 @@ function User() {
         </SearchForm>
         <SearchList>
           <ListElementNameBox>
+            <ListElementName>ID</ListElementName>
             <ListElementName>이메일</ListElementName>
           </ListElementNameBox>
           {userData.map((Data: any) => (
-            <ListBox key={Data.email} value={Data.email} onClick={onUserDetail}>
+            <ListBox key={Data.email} value={Data.idx} onClick={onUserDetail}>
               {Data.email}
             </ListBox>
           ))}

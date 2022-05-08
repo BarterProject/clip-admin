@@ -21,6 +21,12 @@ export const ItemDetailState = atom({
   key: "selectItemDetail",
   default: false,
 });
+
+export const selectedUserNumber = atom({
+  key: "selectedUserNumber",
+  default: 0,
+});
+
 export const selectedItemNumber = atom({
   key: "selectedItemNumber",
   default: 0,
@@ -39,17 +45,4 @@ export const ReportDataState = atom({
 export const PageNumber = atom({
   key: "number",
   default: 0,
-});
-
-export const UserTotalPage = atom({
-  key: "number",
-  default: 1,
-});
-export const ItemTotalPage = atom({
-  key: "number",
-  default: 1,
-});
-export const ReportTotalPage = atom({
-  key: "number",
-  default: 1,
 });

@@ -9,6 +9,7 @@ export const SearchList = styled.ul`
   justify-content: right;
   align-content: space-around;
   list-style: none;
+  align-items: center;
   margin-top: 40px;
 `;
 

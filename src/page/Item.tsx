@@ -38,6 +38,7 @@ function Item() {
   const selectedNumberState = useSetRecoilState(selectedItemNumber);
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
+  const [totalPage, setTotalPage] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -57,6 +58,8 @@ function Item() {
       const { data } = await itemApi.getItemList(currentPage + 1);
       setItemData(data.items);
       console.log(data.items);
+      setTotalPage(parseInt(data.total_page));
+      console.log(parseInt(data.total_page));
     } catch (e) {
       console.log(e);
     }

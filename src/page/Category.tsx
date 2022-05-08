@@ -19,20 +19,24 @@ const NewCategoryInput = styled.input``;
 const ListBox = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const CategoryBox = styled.button`
   width: 100px;
   height: 100px;
-  background-color: #b4b4b4;
-  border-color: #999898;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #dacef0;
+  border-color: #b0a1cf;
+  border-radius: 5px;
   outline: none;
-  margin: 10px;
+  margin: 20px;
   &:active {
-    background-color: #e6007e;
+    background-color: #6c4ec0;
   }
   &:focus {
-    background-color: #e6007e;
+    background-color: #886bcd;
   }
 `;
 
