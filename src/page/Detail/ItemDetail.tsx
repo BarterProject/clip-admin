@@ -1,4 +1,4 @@
-import { oneItemApi } from "api";
+import { activateItemApi, deactivateItemApi, oneItemApi } from "api";
 import { selectedItemNumber } from "atoms";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -47,6 +47,24 @@ function ItemDetail() {
   useEffect(() => {
     getItemInfomation();
   }, []);
+
+  const activateItem = async () => {
+    try {
+      const { data } = await activateItemApi.activateItem(selectedNumber);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const deactivateItem = async () => {
+    try {
+      const { data } = await deactivateItemApi.deactivateItem(selectedNumber);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <DetailBox>
       <Profile>
@@ -76,7 +94,11 @@ function ItemDetail() {
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          <DetailText>{stateData}</DetailText>
+          {stateData == "1" ? (
+            <DetailText>활성화</DetailText>
+          ) : (
+            <DetailText>비활성화</DetailText>
+          )}
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>실 제품 소유자</DetailName>
@@ -84,8 +106,8 @@ function ItemDetail() {
           <ProfileImg />
         </SmallDetailBox>
         <BtnBox>
-          <SubmitBtn>내용 수정</SubmitBtn>
-          <Btn>제품 삭제</Btn>
+          <SubmitBtn onClick={activateItem}>아이템 활성화</SubmitBtn>
+          <Btn onClick={deactivateItem}>아이템 비활성화</Btn>
         </BtnBox>
       </DetailBoxFrame>
     </DetailBox>

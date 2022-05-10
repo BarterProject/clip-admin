@@ -54,8 +54,8 @@ function User() {
       const { data } = await userApi.getUserList(currentPage + 1);
       setUserData(data.users);
       console.log(data.users);
-      setTotalPage(parseInt(data.total_page));
-      console.log(parseInt(data.total_page));
+      setTotalPage(data.total_page);
+      console.log(totalPage);
     } catch (e) {
       console.log(e);
     }
@@ -101,7 +101,7 @@ function User() {
               {Data.email}
             </ListBox>
           ))}
-          <Paging />
+          <Paging page={totalPage} />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

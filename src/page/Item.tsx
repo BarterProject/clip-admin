@@ -56,10 +56,12 @@ function Item() {
   const getItemList = async () => {
     try {
       const { data } = await itemApi.getItemList(currentPage + 1);
+      console.log(data);
       setItemData(data.items);
       console.log(data.items);
+      //console.log(parseInt(data.total_page));
       setTotalPage(parseInt(data.total_page));
-      console.log(parseInt(data.total_page));
+      //console.log(totalPage);
     } catch (e) {
       console.log(e);
     }
@@ -106,7 +108,7 @@ function Item() {
           <ListElementNameBox>
             <ListElementName>ID</ListElementName>
             <ListElementName>제품명</ListElementName>
-            <ListElementName>현소유자</ListElementName>
+            {/* <ListElementName>현소유자</ListElementName> */}
           </ListElementNameBox>
           {itemData.map((Data: any) => (
             <ListBox key={Data.idx} value={Data.idx} onClick={onItemDetail}>
@@ -116,7 +118,7 @@ function Item() {
               <ElementText>{Data.owner.email}</ElementText> */}
             </ListBox>
           ))}
-          <Paging />
+          <Paging page={totalPage} />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}

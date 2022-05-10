@@ -76,7 +76,7 @@ function Report() {
               <ElementText>{Data.user.email}</ElementText>
             </ListBox>
           ))}
-          <Paging />
+          <Paging page={totalPage} />
         </SearchList>
       </ListDiv>
       {isDetail ? <ReportDetail /> : <div></div>}

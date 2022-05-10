@@ -49,12 +49,7 @@ function Category() {
   const [categoryData, setCategoryData] = useState([]);
   const [search, setSearch] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
-  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const {
-      currentTarget: { value },
-    } = event;
-    setSearch(value);
-  };
+
   //new category name input state
   const onNewCategoryNameChange = (
     event: React.FormEvent<HTMLInputElement>
@@ -66,10 +61,6 @@ function Category() {
     setNewCategoryName(value);
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(search);
-  };
   //save new category api
   const saveNewCategory = async () => {
     try {
@@ -112,14 +103,6 @@ function Category() {
     <AdminDiv>
       <ListDiv>
         <PageName>카테고리</PageName>
-        {/* <SearchForm onSubmit={onSubmit}>
-          <SearchBox>
-            <SearchBar onChange={onChange} placeholder="Search for..." />
-          </SearchBox>
-          <SearchButton>
-            <FontAwesomeIcon size="2x" icon={faMagnifyingGlass} />
-          </SearchButton>
-        </SearchForm> */}
         <ListBox>
           {categoryData.map((Data: any) => (
             <CategoryBox

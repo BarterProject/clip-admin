@@ -44,10 +44,9 @@ const RightBtn = styled(ArrowBtn)`
   color: #4f58ab;
 `;
 
-function Paging() {
+function Paging(props: any) {
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
-
   const onFirst = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log((event.target as HTMLButtonElement).value);
@@ -63,10 +62,11 @@ function Paging() {
     console.log((event.target as HTMLButtonElement).value);
     setCurrentPage(parseInt((event.target as HTMLButtonElement).value) - 1);
   };
-
+  //console.log("현재 페이지는" + currentPage);
+  //console.log("전체 페이지는" + props.page);
   return (
     <PagingBox>
-      {currentPage > 1 ? (
+      {currentPage > 0 ? (
         <>
           <LeftBtn onClick={() => setCurrentPage(0)}>{"<<"}</LeftBtn>
           <LeftBtn onClick={() => setCurrentPage(currentPage - 1)}>
@@ -83,14 +83,37 @@ function Paging() {
       ) : (
         <></>
       )}
-      <BtnTwo onClick={onSecond} value={currentPage + 1}>
-        {currentPage + 1}
-      </BtnTwo>
-      <BtnThree onClick={onThird} value={currentPage + 2}>
-        {currentPage + 2}
-      </BtnThree>
-      <RightBtn onClick={() => setCurrentPage(currentPage + 1)}>{">"}</RightBtn>
-      <RightBtn onClick={() => setCurrentPage(0)}>{">>"}</RightBtn>
+      {
+        //여기부터
+      }
+      {currentPage + 1 <= props.page ? (
+        <BtnTwo onClick={onSecond} value={currentPage + 1}>
+          {currentPage + 1}
+        </BtnTwo>
+      ) : (
+        <></>
+      )}
+      {currentPage + 1 < props.page ? (
+        <BtnThree onClick={onThird} value={currentPage + 2}>
+          {currentPage + 2}
+        </BtnThree>
+      ) : (
+        <></>
+      )}
+      {currentPage + 1 < props.page ? (
+        <RightBtn onClick={() => setCurrentPage(currentPage + 1)}>
+          {">"}
+        </RightBtn>
+      ) : (
+        <></>
+      )}
+      {currentPage + 1 == props.page ? (
+        <></>
+      ) : (
+        <RightBtn onClick={() => setCurrentPage(props.page - 1)}>
+          {">>"}
+        </RightBtn>
+      )}
     </PagingBox>
   );
 }

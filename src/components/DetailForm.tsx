@@ -42,20 +42,19 @@ export const DetailBoxFrame = styled.div`
   display: flex;
 `;
 export const Btn = styled.button`
-  width: 100px;
+  width: 120px;
   height: 40px;
   margin-top: 30px;
-`;
-export const SubmitBtn = styled.button`
-  width: 80px;
-  height: 30px;
-  margin-top: 30px;
+  margin: 5px;
   align-self: flex-end;
-  background-color: #5196ff;
+  background-color: #ff4343;
   color: white;
   border: none;
   outline-color: aliceblue;
   border-radius: 5px;
+`;
+export const SubmitBtn = styled(Btn)`
+  background-color: #5196ff;
 `;
 export const MoreBtn = styled.button`
   width: 100px;
