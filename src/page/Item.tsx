@@ -39,6 +39,7 @@ function Item() {
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
   const [totalPage, setTotalPage] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -87,17 +88,19 @@ function Item() {
     console.log(search);
   };
 
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setSelectedOption(value);
+  };
   return (
     <AdminDiv>
       <ListDiv>
         <SearchForm onSubmit={onSubmit}>
           <SearchBox>
             <SearchBar onChange={onChange} placeholder="Search for..." />
-            <SearchOptionSelect>
-              <SerchOption>카테고리</SerchOption>
-              <SerchOption>이름</SerchOption>
-              <SerchOption>소유자</SerchOption>
-              <SerchOption>실소유자</SerchOption>
+            <SearchOptionSelect onChange={selectChange}>
+              <SerchOption value="카테고리">카테고리</SerchOption>
+              <SerchOption value="이름">이름</SerchOption>
             </SearchOptionSelect>
           </SearchBox>
           <SearchButton>
