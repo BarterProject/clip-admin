@@ -19,12 +19,15 @@ export const ListBox = styled.button`
   display: flex;
 `;
 export const ListElementName = styled.span`
-  margin: 0 90px 0 30px;
+  margin: 0 0px 0 5px;
   display: flex;
   height: 30px;
+  width: 33%;
 `;
 export const ListElementNameBox = styled.div`
   display: flex;
+  justify-content: space-around;
+  width: 80%;
 `;
 
 function List() {}
