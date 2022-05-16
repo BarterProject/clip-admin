@@ -1,4 +1,4 @@
-import { oneUserApi } from "api";
+import { activateUserApi, deactivateUserApi, oneUserApi } from "api";
 import { selectedItemNumber } from "atoms";
 import {
   DetailBox,
@@ -10,6 +10,9 @@ import {
   DetailName,
   DetailText,
   MoreBtn,
+  Btn,
+  BtnBox,
+  SubmitBtn,
 } from "Components/DetailForm";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -42,6 +45,26 @@ function UserDetail(props: any) {
   useEffect(() => {
     getUserInfomation();
   }, []);
+
+  const activateUser = async () => {
+    try {
+      const { data } = await activateUserApi.activateUser(props.selectedIdx);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const deactivateUser = async () => {
+    try {
+      const { data } = await deactivateUserApi.deactivateUser(
+        props.selectedIdx
+      );
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <DetailBox>
       <Profile>
@@ -77,6 +100,10 @@ function UserDetail(props: any) {
           <DetailName>계좌</DetailName>
           <DetailText>{userBankAccountData}</DetailText>
         </SmallDetailBox>
+        <BtnBox>
+          <SubmitBtn onClick={activateUser}>유저 활성화</SubmitBtn>
+          <Btn onClick={deactivateUser}>유저 비활성화</Btn>
+        </BtnBox>
         <SmallDetailBox>
           <DetailName>아이템</DetailName>
           <DetailText>아이템이...있다!</DetailText>
