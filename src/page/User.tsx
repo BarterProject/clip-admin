@@ -22,7 +22,7 @@ import {
   SearchForm,
   SearchList,
 } from "Components/SearchBar";
-import { AdminDiv, ListDiv } from "Components/FormalForm";
+import { AdminDiv, ElementText, ListDiv } from "Components/FormalForm";
 import Paging from "Components/Paging";
 
 function User() {
@@ -97,7 +97,7 @@ function User() {
           </ListElementNameBox>
           {userData.map((Data: any) => (
             <ListBox key={Data.email} value={Data.idx} onClick={onUserDetail}>
-              {Data.email}
+              <ElementText>{Data.email}</ElementText>
             </ListBox>
           ))}
           <Paging page={totalPage} />

@@ -17,7 +17,7 @@ export const ListDiv = styled.div`
   min-width: 500px;
   flex-direction: column;
 `;
-export const ElementText = styled.span`
-  width: 33%;
-  margin-right: 30px;
+export const ElementText = styled.div`
+  width: 40%;
+  margin: 5px 0 0 5px;
 `;
