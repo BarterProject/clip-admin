@@ -68,14 +68,18 @@ function Report() {
           <PageName>신고</PageName>
           <ListElementNameBox>
             <ListElementName>제목</ListElementName>
-            <ListElementName>작성자</ListElementName>
+            {/* 
+            <ListElementName>작성자</ListElementName> */}
           </ListElementNameBox>
+
           {reportData.map((Data: any) => (
             <ListBox onClick={onDetail} key={Data.idx} value={Data.idx}>
               <ElementText>{Data.title}</ElementText>
-              <ElementText>{Data.user.email}</ElementText>
+              {/* 
+              <ElementText>{Data.user.email}</ElementText> */}
             </ListBox>
           ))}
+
           <Paging page={totalPage} />
         </SearchList>
       </ListDiv>

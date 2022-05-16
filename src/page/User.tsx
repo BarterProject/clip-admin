@@ -31,16 +31,16 @@ function User() {
   const onUserDetailState = useSetRecoilState(UserDetailState);
   const onItemDetailState = useSetRecoilState(ItemDetailState);
   const [userData, setUserData] = useState([]);
-  const selectedNumberState = useSetRecoilState(selectedUserNumber);
   const currentPage = useRecoilValue(PageNumber);
   const setCurrentPage = useSetRecoilState(PageNumber);
   const [totalPage, setTotalPage] = useState(0);
+  const [selectedUserIdx, setSelectedUserIdx] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onUserDetailState((pre) => !pre);
-    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
-    console.log(event.target);
+    setSelectedUserIdx(parseInt((event.target as HTMLButtonElement).value));
+    console.log(selectedUserIdx + "보여");
     console.log((event.target as HTMLButtonElement).value);
   };
 
@@ -93,7 +93,6 @@ function User() {
         </SearchForm>
         <SearchList>
           <ListElementNameBox>
-            <ListElementName>ID</ListElementName>
             <ListElementName>이메일</ListElementName>
           </ListElementNameBox>
           {userData.map((Data: any) => (
@@ -104,7 +103,11 @@ function User() {
           <Paging page={totalPage} />
         </SearchList>
       </ListDiv>
-      {isUserDetail ? <UserDetail /> : <div></div>}
+      {isUserDetail ? (
+        <UserDetail selectedIdx={selectedUserIdx} />
+      ) : (
+        <div></div>
+      )}
       {isItemDetail ? <ItemDetail /> : <div></div>}
     </AdminDiv>
   );

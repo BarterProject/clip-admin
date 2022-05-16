@@ -7,6 +7,7 @@ import {
   faBarcode,
   faAddressCard,
   faFolder,
+  faChalkboardUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginState } from "atoms";
 import { useSetRecoilState } from "recoil";
@@ -128,6 +129,10 @@ function Nav() {
         <AdminCategory>
           <FontAwesomeIcon size="2x" icon={faAddressCard} color="#fff" />
           <CategoryName to="/report">REPORT</CategoryName>
+        </AdminCategory>
+        <AdminCategory>
+          <FontAwesomeIcon size="2x" icon={faChalkboardUser} color="#fff" />
+          <CategoryName to="/board">BOARD</CategoryName>
         </AdminCategory>
         <AdminCategory>
           <FontAwesomeIcon size="2x" icon={faFolder} color="#fff" />
