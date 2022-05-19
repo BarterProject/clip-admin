@@ -121,10 +121,10 @@ function ItemDetail(props: any) {
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          {stateData == "1" ? (
-            <DetailText>활성화</DetailText>
-          ) : stateData == "0" ? (
+          {stateData == "0" ? (
             <DetailText>비활성화</DetailText>
+          ) : stateData == "1" ? (
+            <DetailText>활성화</DetailText>
           ) : stateData == "2" ? (
             <DetailText>교환중</DetailText>
           ) : stateData == "3" ? (
@@ -147,13 +147,18 @@ function ItemDetail(props: any) {
           <ProfileImg />
         </SmallDetailBox>
         <BtnBox>
-          {stateData == "4" ? (
+          {stateData == "0" ? (
             <SubmitBtn onClick={activateItem}>아이템 활성화</SubmitBtn>
           ) : (
             <></>
           )}
           {stateData == "1" ? (
             <Btn onClick={deactivateItem}>아이템 비활성화</Btn>
+          ) : (
+            <></>
+          )}
+          {stateData == "4" ? (
+            <SubmitBtn onClick={activateItem}>아이템 활성화</SubmitBtn>
           ) : (
             <></>
           )}
