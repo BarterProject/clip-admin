@@ -35,6 +35,7 @@ function Board() {
   const [boardContentData, setBoardContentData] = useState("");
   const [boardCreatedAtData, setBoardCreatedAtData] = useState("");
   const [boardUserEmailData, setBoardUserEmailData] = useState("");
+  const [boardReplyData, setBoardReplyData] = useState("");
 
   useEffect(() => {
     onDetailState((pre) => false);
@@ -48,15 +49,28 @@ function Board() {
       const { data } = await boardApi.getBoardList(currentPage);
       console.log(data.contents);
       setBoardData(data.contents);
-      //setBoardTitleData(data[])
+
+      //setSortedBoardData(sorted());
     } catch (e) {
       console.log(e);
     }
   };
-  const onDetail = (idx: number) => {
+  const onDetail = (
+    idx: number,
+    title: string,
+    createdAt: string,
+    content: string,
+    email: string,
+    reply: string
+  ) => {
     onDetailState((pre) => !pre);
     console.log(idx);
     setSelectedNumber(idx);
+    setBoardTitleData(title);
+    setBoardContentData(content);
+    setBoardCreatedAtData(createdAt);
+    setBoardUserEmailData(email);
+    setBoardReplyData(reply);
   };
 
   return (
@@ -71,7 +85,14 @@ function Board() {
           {boardData.map((Data: any) => (
             <ListBox
               onClick={() => {
-                onDetail(Data.idx);
+                onDetail(
+                  Data.idx,
+                  Data.title,
+                  Data.createdAt,
+                  Data.content,
+                  Data.user.email,
+                  Data.reply
+                );
               }}
               key={Data.idx}
               value={Data.idx}
@@ -84,7 +105,17 @@ function Board() {
           <Paging page={totalPage + 1} />
         </SearchList>
       </ListDiv>
-      {isDetail ? <BoardDetail /> : <div></div>}
+      {isDetail ? (
+        <BoardDetail
+          title={boardTitleData}
+          content={boardContentData}
+          user={boardUserEmailData}
+          create={boardCreatedAtData}
+          reply={boardReplyData}
+        />
+      ) : (
+        <div></div>
+      )}
     </AdminDiv>
   );
 }
