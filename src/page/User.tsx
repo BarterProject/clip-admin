@@ -51,7 +51,7 @@ function User() {
 
   const getUserList = async () => {
     try {
-      const { data } = await userApi.getUserList(currentPage + 1);
+      const { data } = await userApi.getUserList(currentPage);
       setUserData(data.users);
       console.log(data.users);
       setTotalPage(data.total_page);
@@ -100,7 +100,7 @@ function User() {
               <ElementText>{Data.email}</ElementText>
             </ListBox>
           ))}
-          <Paging page={totalPage} />
+          <Paging page={totalPage + 1} />
         </SearchList>
       </ListDiv>
       {isUserDetail ? (

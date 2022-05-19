@@ -36,7 +36,7 @@ function Board() {
   }, []);
   const getBoardList = async () => {
     try {
-      const { data } = await boardApi.getBoardList(currentPage + 1);
+      const { data } = await boardApi.getBoardList(currentPage);
       console.log(data);
     } catch (e) {
       console.log(e);

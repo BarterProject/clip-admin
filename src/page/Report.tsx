@@ -43,7 +43,7 @@ function Report() {
 
   const getReportList = async () => {
     try {
-      const { data } = await reportApi.getReportList(currentPage + 1);
+      const { data } = await reportApi.getReportList(currentPage);
       setReportData(data.reports);
       reportDataState(data.reports);
       console.log(data.reports);
@@ -80,7 +80,7 @@ function Report() {
             </ListBox>
           ))}
 
-          <Paging page={totalPage} />
+          <Paging page={totalPage + 1} />
         </SearchList>
       </ListDiv>
       {isDetail ? <ReportDetail /> : <div></div>}

@@ -56,7 +56,7 @@ function Item() {
 
   const getItemList = async () => {
     try {
-      const { data } = await itemApi.getItemList(currentPage + 1);
+      const { data } = await itemApi.getItemList(currentPage);
       console.log(data);
       setItemData(data.items);
       console.log(data.items);
@@ -121,7 +121,7 @@ function Item() {
               <ElementText>{Data.owner.email}</ElementText> */}
             </ListBox>
           ))}
-          <Paging page={totalPage} />
+          <Paging page={totalPage + 1} />
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}
