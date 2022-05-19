@@ -54,13 +54,12 @@ function Report() {
     }
   };
 
-  const onDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onDetail = (idx: number) => {
     onDetailState((pre) => !pre);
-    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
-    console.log(event.target);
-    console.log((event.target as HTMLButtonElement).value);
+    console.log(idx);
+    selectedNumberState(idx);
   };
+
   return (
     <AdminDiv>
       <ListDiv>
@@ -73,7 +72,13 @@ function Report() {
           </ListElementNameBox>
 
           {reportData.map((Data: any) => (
-            <ListBox onClick={onDetail} key={Data.idx} value={Data.idx}>
+            <ListBox
+              onClick={() => {
+                onDetail(Data.idx);
+              }}
+              key={Data.idx}
+              value={Data.idx}
+            >
               <ElementText>{Data.title}</ElementText>
               {/* 
               <ElementText>{Data.user.email}</ElementText> */}

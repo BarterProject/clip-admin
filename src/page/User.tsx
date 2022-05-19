@@ -36,12 +36,10 @@ function User() {
   const [totalPage, setTotalPage] = useState(0);
   const [selectedUserIdx, setSelectedUserIdx] = useState(0);
 
-  const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onUserDetail = (idx: number) => {
     onUserDetailState((pre) => !pre);
-    setSelectedUserIdx(parseInt((event.target as HTMLButtonElement).value));
-    console.log(selectedUserIdx + "보여");
-    console.log((event.target as HTMLButtonElement).value);
+    console.log(idx);
+    setSelectedUserIdx(idx);
   };
 
   const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -96,7 +94,13 @@ function User() {
             <ListElementName>이메일</ListElementName>
           </ListElementNameBox>
           {userData.map((Data: any) => (
-            <ListBox key={Data.email} value={Data.idx} onClick={onUserDetail}>
+            <ListBox
+              key={Data.email}
+              value={Data.idx}
+              onClick={() => {
+                onUserDetail(Data.idx);
+              }}
+            >
               <ElementText>{Data.email}</ElementText>
             </ListBox>
           ))}

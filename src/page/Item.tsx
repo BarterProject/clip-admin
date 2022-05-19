@@ -40,29 +40,26 @@ function Item() {
   const setCurrentPage = useSetRecoilState(PageNumber);
   const [totalPage, setTotalPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedItemIdx, setSelectedItemIdx] = useState(0);
 
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onUserDetailState((pre) => !pre);
   };
 
-  const onItemDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onItemDetail = (idx: number) => {
     onItemDetailState((pre) => !pre);
-    selectedNumberState(parseInt((event.target as HTMLButtonElement).value));
-    console.log(event.target);
-    console.log((event.target as HTMLButtonElement).value);
+    console.log(idx);
+    setSelectedItemIdx(idx);
   };
 
   const getItemList = async () => {
     try {
       const { data } = await itemApi.getItemList(currentPage);
       console.log(data);
-      setItemData(data.items);
       console.log(data.items);
-      //console.log(parseInt(data.total_page));
+      setItemData(data.items);
       setTotalPage(parseInt(data.total_page));
-      //console.log(totalPage);
     } catch (e) {
       console.log(e);
     }
@@ -114,7 +111,13 @@ function Item() {
             {/* <ListElementName>현소유자</ListElementName> */}
           </ListElementNameBox>
           {itemData.map((Data: any) => (
-            <ListBox key={Data.idx} value={Data.idx} onClick={onItemDetail}>
+            <ListBox
+              key={Data.idx}
+              value={Data.idx}
+              onClick={() => {
+                onItemDetail(Data.idx);
+              }}
+            >
               <ElementText>{Data.idx}</ElementText>
               <ElementText>{Data.name}</ElementText>
               {/* 
@@ -125,7 +128,11 @@ function Item() {
         </SearchList>
       </ListDiv>
       {isUserDetail ? <UserDetail /> : <div></div>}
-      {isItemDetail ? <ItemDetail /> : <div></div>}
+      {isItemDetail ? (
+        <ItemDetail selectedIdx={selectedItemIdx} />
+      ) : (
+        <div></div>
+      )}
     </AdminDiv>
   );
 }
