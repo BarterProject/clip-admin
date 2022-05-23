@@ -113,6 +113,7 @@ function Item() {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setCurrentPage(0);
     {
       selectedOption == "itemName" ? (
         getSearchItemToQueryList()
