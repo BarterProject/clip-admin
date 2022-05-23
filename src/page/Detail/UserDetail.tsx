@@ -19,6 +19,8 @@ import {
   BtnBox,
   SubmitBtn,
 } from "Components/DetailForm";
+import { ElementText } from "Components/FormalForm";
+import { ListBox } from "Components/List";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -140,7 +142,9 @@ function UserDetail(props: any) {
         </BtnBox>
         <SmallDetailBox>
           <DetailName>아이템</DetailName>
-          <DetailText>아이템이...있다!</DetailText>
+          {/* {userOwnerItemData.map((Data: any) => {
+            <ListBox key={Data.idx}>{Data.name}</ListBox>;
+          })} */}
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>등록한 아이템</DetailName>
