@@ -97,6 +97,21 @@ const LogoutBtn = styled.button`
   font-size: 14px;
   border-radius: 10px;
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
+
 function Nav() {
   const isLogined = useSetRecoilState(LoginState);
   const Logout = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -140,9 +155,9 @@ function Nav() {
         </AdminCategory>
       </AdminCategiryList>
 
-      <Link to="/">
-        <LogoutBtn onClick={Logout}>로그아웃</LogoutBtn>
-      </Link>
+      <LogoutBtn onClick={Logout}>
+        <StyledLink to="/">로그아웃</StyledLink>
+      </LogoutBtn>
     </NavStyle>
   );
 }
