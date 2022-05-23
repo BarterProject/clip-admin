@@ -89,7 +89,12 @@ function Login() {
         <TitleText>CLIP</TitleText>
         <LoginForm onSubmit={onSubmit}>
           <InputText onChange={onChangeID} value={id} placeholder="ID" />
-          <InputText onChange={onChangePW} value={pw} placeholder="PASSWORD" />
+          <InputText
+            onChange={onChangePW}
+            value={pw}
+            placeholder="PASSWORD"
+            type="password"
+          />
           <SubmitButton>Login</SubmitButton>
         </LoginForm>
       </LoginBox>

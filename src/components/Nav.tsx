@@ -139,7 +139,10 @@ function Nav() {
           <CategoryName to="/category">CATEGORY</CategoryName>
         </AdminCategory>
       </AdminCategiryList>
-      <LogoutBtn onClick={Logout}>로그아웃</LogoutBtn>
+
+      <Link to="/">
+        <LogoutBtn onClick={Logout}>로그아웃</LogoutBtn>
+      </Link>
     </NavStyle>
   );
 }
