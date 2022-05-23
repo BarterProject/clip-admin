@@ -11,7 +11,11 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { itemApi, itemSearchApi } from "../api/index";
+import {
+  itemApi,
+  itemSearchToQueryApi,
+  itemSearchToIdxApi,
+} from "../api/index";
 import {
   SearchBar,
   SearchBox,
@@ -41,7 +45,6 @@ function Item() {
   const setCurrentPage = useSetRecoilState(PageNumber);
   const [totalPage, setTotalPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState("itemName");
-  const [queryORcategoryidx, setqueryORcategoryidx] = useState("query");
   const [selectedItemIdx, setSelectedItemIdx] = useState(0);
   const onUserDetail = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -66,12 +69,23 @@ function Item() {
     }
   };
 
-  const getSearchItemList = async () => {
+  const getSearchItemToQueryList = async () => {
     try {
-      const { data } = await itemSearchApi.itemSearch(
+      const { data } = await itemSearchToQueryApi.itemSearchToQuery(
         currentPage,
-        selectedOption,
-        queryORcategoryidx,
+        search
+      );
+      setItemData(data.items);
+      console.log(data.items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getSearchItemToIdxList = async () => {
+    try {
+      const { data } = await itemSearchToIdxApi.itemSearchToIdx(
+        currentPage,
         search
       );
       setItemData(data.items);
@@ -99,7 +113,15 @@ function Item() {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getSearchItemList();
+    {
+      selectedOption == "itemName" ? (
+        getSearchItemToQueryList()
+      ) : selectedOption == "category" ? (
+        getSearchItemToIdxList()
+      ) : (
+        <></>
+      );
+    }
     console.log(search);
   };
 
@@ -107,13 +129,9 @@ function Item() {
     const value = event.target.value;
     setSelectedOption(value);
     console.log("test", selectedOption);
-    setqueryORcategoryidx(
-      selectedOption == "itemName" ? "query" : "categoryIdx"
-    );
   };
 
   console.log("mode: " + selectedOption);
-  console.log("쿼리 or 카테고리 idx: " + queryORcategoryidx);
   return (
     <AdminDiv>
       <ListDiv>
@@ -121,8 +139,8 @@ function Item() {
           <SearchBox>
             <SearchBar onChange={onChange} placeholder="Search for..." />
             <SearchOptionSelect onChange={selectChange}>
-              <SerchOption value="category">카테고리</SerchOption>
               <SerchOption value="itemName">이름</SerchOption>
+              <SerchOption value="category">카테고리</SerchOption>
             </SearchOptionSelect>
           </SearchBox>
           <SearchButton>
