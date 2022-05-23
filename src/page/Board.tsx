@@ -18,10 +18,14 @@ import {
 } from "Components/FormalForm";
 import { SearchList } from "Components/SearchBar";
 import { useEffect, useState } from "react";
-import { boardApi, reportApi } from "api";
+import { boardApi, postBoardApi, replyPostApi, reportApi } from "api";
 import Paging from "Components/Paging";
 import ReportDetail from "./Detail/ReportDetail";
 import BoardDetail from "./Detail/BoardDetail";
+import styled from "styled-components";
+import { SubmitBtn } from "Components/DetailForm";
+
+const PostInput = styled.input``;
 
 function Board() {
   const onDetailState = useSetRecoilState(DetailState);
@@ -36,6 +40,8 @@ function Board() {
   const [boardCreatedAtData, setBoardCreatedAtData] = useState("");
   const [boardUserEmailData, setBoardUserEmailData] = useState("");
   const [boardReplyData, setBoardReplyData] = useState("");
+  const [postTitleData, setPostTitleData] = useState("");
+  const [postContextData, setPostContextData] = useState("");
 
   useEffect(() => {
     onDetailState((pre) => false);
@@ -73,6 +79,34 @@ function Board() {
     setBoardReplyData(reply);
   };
 
+  //new post create
+  const postTitleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    console.log(value);
+    setPostTitleData(value);
+  };
+  const postContextInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    console.log(value);
+    setPostContextData(value);
+  };
+  //post board api
+  const postBoard = async () => {
+    try {
+      const { data } = await postBoardApi.postBoard(
+        postTitleData,
+        postContextData
+      );
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <AdminDiv>
       <ListDiv>
@@ -103,6 +137,9 @@ function Board() {
           ))}
 
           <Paging page={totalPage + 1} />
+          <PostInput placeholder="제목" onChange={postTitleInputChange} />
+          <PostInput placeholder="내용" onChange={postContextInputChange} />
+          <SubmitBtn onClick={postBoard}>작성하기</SubmitBtn>
         </SearchList>
       </ListDiv>
       {isDetail ? (
@@ -112,6 +149,7 @@ function Board() {
           user={boardUserEmailData}
           create={boardCreatedAtData}
           reply={boardReplyData}
+          idx={selectedNumber}
         />
       ) : (
         <div></div>

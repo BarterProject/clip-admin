@@ -53,11 +53,6 @@ function ReportDetail() {
           <DetailText>{reportContentData}</DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
-          <DetailName>답장</DetailName>
-          <DetailText>웅냐</DetailText>
-        </SmallDetailBox>
-        <SubmitBtn>답장하기</SubmitBtn>
-        <SmallDetailBox>
           <DetailName>상태</DetailName>
           {reportStateData == "1" ? <Btn>처리중</Btn> : <Btn>처리완료</Btn>}
         </SmallDetailBox>

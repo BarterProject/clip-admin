@@ -1,4 +1,9 @@
-import { activateUserApi, deactivateUserApi, oneUserApi } from "api";
+import {
+  activateUserApi,
+  deactivateUserApi,
+  oneUserApi,
+  userItemSearchApi,
+} from "api";
 import { selectedItemNumber } from "atoms";
 import {
   DetailBox,
@@ -26,7 +31,8 @@ function UserDetail(props: any) {
   const [userStateData, setUserStateData] = useState("");
   const [userBankData, setUserBankData] = useState("");
   const [userBankAccountData, setUserBankAccountData] = useState("");
-
+  const [userOwnerItemData, setUserOwnerItemData] = useState([]);
+  const [userRegistrentItemData, setUserRegistrentItemData] = useState([]);
   const getUserInfomation = async () => {
     try {
       const { data } = await oneUserApi.getOneUserList(props.selectedIdx);
@@ -42,8 +48,36 @@ function UserDetail(props: any) {
       console.log(e);
     }
   };
+
+  const getUserRegistrantItemList = async () => {
+    try {
+      const { data } = await userItemSearchApi.userItem(
+        props.selectedIdx,
+        "registrant"
+      );
+      setUserRegistrentItemData(data.items);
+      console.log(data.items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const getUserOwnerItemList = async () => {
+    try {
+      const { data } = await userItemSearchApi.userItem(
+        props.selectedIdx,
+        "owner"
+      );
+      setUserOwnerItemData(data.items);
+      console.log(data.items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getUserInfomation();
+    getUserRegistrantItemList();
+    getUserOwnerItemList();
   }, []);
 
   const activateUser = async () => {
@@ -108,7 +142,11 @@ function UserDetail(props: any) {
           <DetailName>아이템</DetailName>
           <DetailText>아이템이...있다!</DetailText>
         </SmallDetailBox>
-        <MoreBtn>더보기</MoreBtn>
+        <SmallDetailBox>
+          <DetailName>등록한 아이템</DetailName>
+          <DetailText>아이템이...있다!</DetailText>
+        </SmallDetailBox>
+        {/* <MoreBtn>더보기</MoreBtn> */}
       </DetailBoxFrame>
     </DetailBox>
   );

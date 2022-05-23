@@ -47,7 +47,6 @@ const Btn = styled.button`
 function Category() {
   const [selectedBtn, setSelectedBtn] = useState(0);
   const [categoryData, setCategoryData] = useState([]);
-  const [search, setSearch] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
 
   //new category name input state
