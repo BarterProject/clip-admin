@@ -29,7 +29,7 @@ function BoardDetail(props: any) {
   //reply api
   const replyBoard = async () => {
     try {
-      const { data } = await replyPostApi.replyPost(replyData, props.idx);
+      const { data } = await replyPostApi.replyPost(props.idx, replyData);
       console.log(data);
     } catch (e) {
       console.log(e);
