@@ -13,7 +13,7 @@ import { LoginState } from "atoms";
 import { useSetRecoilState } from "recoil";
 
 const NavStyle = styled.div`
-  width: 20%;
+  width: 20vw;
   height: 100vh;
   background-color: #373351;
   display: flex;
@@ -23,6 +23,7 @@ const NavStyle = styled.div`
   flex-direction: column;
   min-width: 250px;
   min-height: 500px;
+  position: fixed;
   align-items: center;
 `;
 const AdminProfile = styled.div`

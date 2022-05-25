@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const AdminDiv = styled.div`
   flex-direction: row;
-  width: 100vw;
+  width: 80vw;
   display: flex;
+  margin-left: 250px;
 `;
 export const PageName = styled.span`
   font-size: 30px;
