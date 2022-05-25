@@ -44,6 +44,13 @@ const Btn = styled.button`
   width: 60px;
 `;
 
+const CategoryDiv = styled.div`
+  flex-direction: row;
+  width: 80vw;
+  display: flex;
+  margin-left: 350px;
+`;
+
 function Category() {
   const [selectedBtn, setSelectedBtn] = useState(0);
   const [categoryData, setCategoryData] = useState([]);
@@ -99,7 +106,7 @@ function Category() {
   }, []);
 
   return (
-    <AdminDiv>
+    <CategoryDiv>
       <ListDiv>
         <PageName>카테고리</PageName>
         <ListBox>
@@ -123,7 +130,7 @@ function Category() {
           <Btn onClick={deleteCategory}>삭제</Btn>
         </BtnBox>
       </ListDiv>
-    </AdminDiv>
+    </CategoryDiv>
   );
 }
 
