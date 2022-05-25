@@ -68,6 +68,7 @@ a {
 }
 `;
 const AdminDiv = styled.div`
+  height: 100%;
   flex-direction: row;
   display: flex;
 `;

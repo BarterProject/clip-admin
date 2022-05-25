@@ -20,6 +20,19 @@ import {
   SubmitBtn,
 } from "components/DetailForm";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const ItemList = styled.div``;
+const UserItemBox = styled.div`
+  width: 150px;
+  height: 30px;
+  margin: 0 0 5px 0;
+  padding: 0 2px 0 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color: #eef0ff;
+  border-radius: 50px;
+`;
 
 function UserDetail(props: any) {
   const [userEmailData, setUserEmailData] = useState("");
@@ -138,13 +151,19 @@ function UserDetail(props: any) {
         </BtnBox>
         <SmallDetailBox>
           <DetailName>아이템</DetailName>
-          {/* {userOwnerItemData.map((Data: any) => {
-            <ListBox key={Data.idx}>{Data.name}</ListBox>;
-          })} */}
+          <ItemList>
+            {userOwnerItemData.map((Data: any) => (
+              <UserItemBox>{Data.name}</UserItemBox>
+            ))}
+          </ItemList>
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>등록한 아이템</DetailName>
-          <DetailText>아이템이...있다!</DetailText>
+          <ItemList>
+            {userRegistrentItemData.map((Data: any) => {
+              return <UserItemBox>{Data.name}</UserItemBox>;
+            })}
+          </ItemList>
         </SmallDetailBox>
         {/* <MoreBtn>더보기</MoreBtn> */}
       </DetailBoxFrame>
