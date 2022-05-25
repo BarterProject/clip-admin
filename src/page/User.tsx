@@ -15,15 +15,15 @@ import {
   ListBox,
   ListElementName,
   ListElementNameBox,
-} from "../Components/List";
+} from "../components/List";
 import {
   SearchBar,
   SearchButton,
   SearchForm,
   SearchList,
-} from "Components/SearchBar";
-import { AdminDiv, ElementText, ListDiv } from "Components/FormalForm";
-import Paging from "Components/Paging";
+} from "components/SearchBar";
+import { AdminDiv, ElementText, ListDiv } from "components/FormalForm";
+import Paging from "components/Paging";
 
 function User() {
   const isUserDetail = useRecoilValue(UserDetailState);

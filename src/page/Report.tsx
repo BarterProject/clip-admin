@@ -11,17 +11,17 @@ import List, {
   ListBox,
   ListElementName,
   ListElementNameBox,
-} from "Components/List";
+} from "components/List";
 import {
   AdminDiv,
   ElementText,
   ListDiv,
   PageName,
-} from "Components/FormalForm";
-import { SearchList } from "Components/SearchBar";
+} from "components/FormalForm";
+import { SearchList } from "components/SearchBar";
 import { useEffect, useState } from "react";
 import { reportApi } from "api";
-import Paging from "Components/Paging";
+import Paging from "components/Paging";
 
 function Report() {
   const isDetail = useRecoilValue(DetailState);

@@ -8,7 +8,7 @@ import {
   DetailText,
   SubmitBtn,
   Btn,
-} from "Components/DetailForm";
+} from "components/DetailForm";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";

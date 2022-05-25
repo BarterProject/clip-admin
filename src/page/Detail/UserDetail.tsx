@@ -18,12 +18,8 @@ import {
   Btn,
   BtnBox,
   SubmitBtn,
-} from "Components/DetailForm";
-import { ElementText } from "Components/FormalForm";
-import { ListBox } from "Components/List";
+} from "components/DetailForm";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 
 function UserDetail(props: any) {
   const [userEmailData, setUserEmailData] = useState("");

@@ -9,21 +9,21 @@ import List, {
   ListBox,
   ListElementName,
   ListElementNameBox,
-} from "Components/List";
+} from "components/List";
 import {
   AdminDiv,
   ElementText,
   ListDiv,
   PageName,
-} from "Components/FormalForm";
-import { SearchList } from "Components/SearchBar";
+} from "components/FormalForm";
+import { SearchList } from "components/SearchBar";
 import { useEffect, useState } from "react";
 import { boardApi, postBoardApi, replyPostApi, reportApi } from "api";
-import Paging from "Components/Paging";
+import Paging from "components/Paging";
 import ReportDetail from "./Detail/ReportDetail";
 import BoardDetail from "./Detail/BoardDetail";
 import styled from "styled-components";
-import { SubmitBtn } from "Components/DetailForm";
+import { SubmitBtn } from "components/DetailForm";
 
 const PostInput = styled.input``;
 

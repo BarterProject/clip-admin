@@ -22,7 +22,7 @@ import {
   BtnBox,
   Btn,
   SubmitBtn,
-} from "../../Components/DetailForm";
+} from "../../components/DetailForm";
 
 function ItemDetail(props: any) {
   const [oneItemData, setOneItemData] = useState();

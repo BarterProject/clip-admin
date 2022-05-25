@@ -24,14 +24,14 @@ import {
   SearchOptionSelect,
   SerchOption,
   SearchForm,
-} from "Components/SearchBar";
+} from "components/SearchBar";
 import List, {
   ListBox,
   ListElementName,
   ListElementNameBox,
-} from "Components/List";
-import { AdminDiv, ElementText, ListDiv } from "Components/FormalForm";
-import Paging from "Components/Paging";
+} from "components/List";
+import { AdminDiv, ElementText, ListDiv } from "components/FormalForm";
+import Paging from "components/Paging";
 
 function Item() {
   const isUserDetail = useRecoilValue(UserDetailState);

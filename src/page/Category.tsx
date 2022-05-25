@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminDiv, ListDiv, PageName } from "Components/FormalForm";
+import { AdminDiv, ListDiv, PageName } from "components/FormalForm";
 /* import {
   SearchBar,
   SearchOptionSelect,
@@ -13,7 +13,7 @@ import { AdminDiv, ListDiv, PageName } from "Components/FormalForm";
 } from "Components/SearchBar"; */
 import { useEffect, useState } from "react";
 import { categoryApi, deleteCategoryApi, saveCategoryApi } from "api";
-import { BtnBox } from "Components/DetailForm";
+import { BtnBox } from "components/DetailForm";
 
 const NewCategoryInput = styled.input``;
 const ListBox = styled.div`

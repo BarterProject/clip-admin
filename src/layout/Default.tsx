@@ -5,7 +5,7 @@ import User from "page/User";
 import Category from "page/Category";
 import Item from "page/Item";
 import Report from "page/Report";
-import Nav from "Components/Nav";
+import Nav from "components/Nav";
 import Board from "page/Board";
 
 function Default() {
