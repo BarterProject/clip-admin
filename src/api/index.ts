@@ -108,8 +108,8 @@ export const refundItemApi = {
 };
 //item deposit return
 export const returnDepositItemApi = {
-  returnDepositItem(idx: number): Promise<AxiosResponse<any>> {
-    return api.put(`/api/v2/admin/items/${idx}/returnDeposit`);
+  returnDepositem(idx: number): Promise<AxiosResponse<any>> {
+    return api.post(`/api/v2/admin/deliveries/${idx}/returnDeposit`);
   },
 };
 

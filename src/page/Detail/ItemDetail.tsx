@@ -24,20 +24,25 @@ import {
   SubmitBtn,
 } from "../../components/DetailForm";
 
+import { itemType, deliveryType } from "../../types";
+
 function ItemDetail(props: any) {
-  const [oneItemData, setOneItemData] = useState();
+  const [oneItemData, setOneItemData] = useState<itemType>();
   const [itemNameData, setItemNameData] = useState("");
   const [depositData, setDepositData] = useState("");
   const [itemCategoryData, setItemCategoryData] = useState("");
   const [ownerData, setOwner] = useState();
   const [descriptionData, setDescription] = useState("");
   const [stateData, setState] = useState("");
+  const [deliveryData, setDeliveryData] = useState(0);
   const [registrantData, setRegistrant] = useState();
   const getItemInfomation = async () => {
     try {
       const { data } = await oneItemApi.getOneItemList(props.selectedIdx);
       setOneItemData(data);
+      console.log(data);
       setItemNameData(data.name);
+      setDeliveryData(data.delivery.idx);
       setDepositData(data.deposit);
       setItemCategoryData(data.itemCategory.name);
       setOwner(data.owner.email);
@@ -83,7 +88,7 @@ function ItemDetail(props: any) {
 
   const returnDepositItem = async () => {
     try {
-      const { data } = await returnDepositItemApi.returnDepositItem(
+      const { data } = await returnDepositItemApi.returnDepositem(
         props.selectedIdx
       );
       console.log(data);
