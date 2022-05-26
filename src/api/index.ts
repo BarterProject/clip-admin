@@ -29,6 +29,13 @@ export const oneUserApi = {
   },
 };
 
+//user search Api
+export const userSearchApi = {
+  userSearch(idx: number, query: string): Promise<AxiosResponse<any>> {
+    return api.get(`/api/v2/admin/user?page=${idx}&mode=email&query=${query}`);
+  },
+};
+
 //get item infomation
 export const itemApi = {
   getItemList(idx: number): Promise<AxiosResponse<any>> {

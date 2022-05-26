@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { userApi } from "../api/index";
+import { userApi, userSearchApi } from "../api/index";
 import {
   ListBox,
   ListElementName,
@@ -69,6 +69,16 @@ function User() {
 
   const [search, setSearch] = useState("");
 
+  const getUserSearchToEmail = async () => {
+    try {
+      const { data } = await userSearchApi.userSearch(currentPage, search);
+      setUserData(data.users);
+      console.log(data.users);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
@@ -77,6 +87,7 @@ function User() {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    getUserSearchToEmail();
     console.log(search);
   };
 
