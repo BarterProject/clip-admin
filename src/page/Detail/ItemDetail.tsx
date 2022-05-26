@@ -42,7 +42,6 @@ function ItemDetail(props: any) {
       setOneItemData(data);
       console.log(data);
       setItemNameData(data.name);
-      setDeliveryData(data.delivery.idx);
       setDepositData(data.deposit);
       setItemCategoryData(data.itemCategory.name);
       setOwner(data.owner.email);
