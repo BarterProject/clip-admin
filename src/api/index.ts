@@ -162,6 +162,12 @@ export const itemSearchToIdxApi = {
   },
 };
 
+export const itemSearchToState = {
+  itemSearchToState(idx: number, state: string): Promise<AxiosResponse<any>> {
+    return api.get(`/api/v2/admin/items?page=${idx}&mode=all&state=${state}`);
+  },
+};
+
 //user owner/registrant item search Api
 //page: 페이지번호
 //mode: 검색모드 (registrant / owner)

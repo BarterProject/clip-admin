@@ -15,6 +15,7 @@ import {
   itemApi,
   itemSearchToQueryApi,
   itemSearchToIdxApi,
+  itemSearchToState,
 } from "../api/index";
 import {
   SearchBar,
@@ -95,6 +96,19 @@ function Item() {
     }
   };
 
+  const getSearchItemToState = async () => {
+    try {
+      const { data } = await itemSearchToState.itemSearchToState(
+        currentPage,
+        search
+      );
+      setItemData(data.items);
+      console.log(data.items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     onUserDetailState((pre) => false);
     onItemDetailState((pre) => false);
@@ -118,6 +132,8 @@ function Item() {
         getSearchItemToQueryList()
       ) : selectedOption == "category" ? (
         getSearchItemToIdxList()
+      ) : selectedOption == "state" ? (
+        getSearchItemToState()
       ) : (
         <></>
       );
@@ -141,6 +157,7 @@ function Item() {
             <SearchOptionSelect onChange={selectChange}>
               <SerchOption value="itemName">이름</SerchOption>
               <SerchOption value="category">카테고리</SerchOption>
+              <SerchOption value="state">상태</SerchOption>
             </SearchOptionSelect>
           </SearchBox>
           <SearchButton>
