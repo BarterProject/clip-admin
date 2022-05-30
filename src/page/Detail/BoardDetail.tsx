@@ -1,5 +1,5 @@
 import { oneReportApi, replyPostApi, reportApi } from "api";
-import { selectedReportNumber } from "atoms";
+import { onBtn, selectedReportNumber } from "atoms";
 import {
   DetailBox,
   DetailBoxFrame,
@@ -10,13 +10,15 @@ import {
   Btn,
 } from "components/DetailForm";
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
 const ReplyInput = styled.input``;
 
 function BoardDetail(props: any) {
   const [replyData, setReplyData] = useState("");
+  const setOnBtn = useSetRecoilState(onBtn);
+  const isOnBtn = useRecoilValue(onBtn);
 
   //new category name input state
   const replyInputChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -31,6 +33,7 @@ function BoardDetail(props: any) {
     try {
       const { data } = await replyPostApi.replyPost(props.idx, replyData);
       console.log(data);
+      setOnBtn(!isOnBtn);
     } catch (e) {
       console.log(e);
     }
@@ -61,11 +64,17 @@ function BoardDetail(props: any) {
           </DetailText>
         </SmallDetailBox>
         <SmallDetailBox>
-          <ReplyInput
-            placeholder="답장할 내용을 적으세요"
-            onChange={replyInputChange}
-          />
-          <SubmitBtn onClick={replyBoard}>답장하기</SubmitBtn>
+          {props.reply == null ? (
+            <>
+              <ReplyInput
+                placeholder="답장할 내용을 적으세요"
+                onChange={replyInputChange}
+              />
+              <SubmitBtn onClick={replyBoard}>답장하기</SubmitBtn>
+            </>
+          ) : (
+            <></>
+          )}
         </SmallDetailBox>
       </DetailBoxFrame>
     </DetailBox>

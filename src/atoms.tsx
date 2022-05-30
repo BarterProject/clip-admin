@@ -46,3 +46,5 @@ export const PageNumber = atom({
   key: "number",
   default: 0,
 });
+
+export const onBtn = atom({ key: "true", default: true });

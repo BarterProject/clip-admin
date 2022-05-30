@@ -1,5 +1,6 @@
 import {
   DetailState,
+  onBtn,
   PageNumber,
   ReportDataState,
   selectedReportNumber,
@@ -42,11 +43,12 @@ function Board() {
   const [boardReplyData, setBoardReplyData] = useState("");
   const [postTitleData, setPostTitleData] = useState("");
   const [postContextData, setPostContextData] = useState("");
-
+  const setOnBtn = useSetRecoilState(onBtn);
+  const isOnBtn = useRecoilValue(onBtn);
   useEffect(() => {
     onDetailState((pre) => false);
     getBoardList();
-  }, [currentPage]);
+  }, [currentPage, isOnBtn]);
   useEffect(() => {
     setCurrentPage(0);
   }, []);
@@ -102,6 +104,8 @@ function Board() {
         postContextData
       );
       console.log(data);
+
+      setOnBtn(!isOnBtn);
     } catch (e) {
       console.log(e);
     }

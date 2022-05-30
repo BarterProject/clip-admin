@@ -1,4 +1,4 @@
-import { oneReportApi, reportApi } from "api";
+import { completeReportApi, oneReportApi, reportApi } from "api";
 import { selectedReportNumber } from "atoms";
 import {
   DetailBox,
@@ -20,6 +20,8 @@ function ReportDetail() {
   const [reportUserData, setReportUserData] = useState("");
   const [reportContentData, setReportContentData] = useState("");
   const [reportStateData, setReportStateData] = useState("");
+
+  const [onBtn, setOnBtn] = useState(true);
   const getReportList = async () => {
     try {
       const { data } = await oneReportApi.getOneReport(selectedNumber);
@@ -36,7 +38,18 @@ function ReportDetail() {
   };
   useEffect(() => {
     getReportList();
-  }, []);
+  }, [onBtn]);
+
+  const completeReport = async () => {
+    try {
+      const { data } = await completeReportApi.completeReport(selectedNumber);
+      console.log(data);
+      setOnBtn(!onBtn);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <DetailBox>
       <DetailBoxFrame>
@@ -54,7 +67,14 @@ function ReportDetail() {
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          {reportStateData == "1" ? <Btn>처리중</Btn> : <Btn>처리완료</Btn>}
+          {reportStateData == "1" ? (
+            <>
+              <DetailText>처리중</DetailText>
+              <SubmitBtn onClick={completeReport}>완료하기</SubmitBtn>
+            </>
+          ) : (
+            <DetailText>처리완료</DetailText>
+          )}
         </SmallDetailBox>
       </DetailBoxFrame>
     </DetailBox>

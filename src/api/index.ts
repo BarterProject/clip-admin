@@ -199,3 +199,10 @@ export const postBoardApi = {
     });
   },
 };
+
+//report complete
+export const completeReportApi = {
+  completeReport(idx: number): Promise<AxiosResponse<any>> {
+    return api.put(`/api/v2/items/reports/${idx}/complete`);
+  },
+};
