@@ -39,7 +39,7 @@ function UserDetail(props: any) {
   const [userPasswordData, setUserPasswordData] = useState("");
   const [userPhoneData, setUserPhoneData] = useState("");
   const [userAddressData, setUserAddressData] = useState("");
-  const [userStateData, setUserStateData] = useState("");
+  const [userStateData, setUserStateData] = useState();
   const [userBankData, setUserBankData] = useState("");
   const [userBankAccountData, setUserBankAccountData] = useState("");
   const [userOwnerItemData, setUserOwnerItemData] = useState([]);
@@ -53,7 +53,7 @@ function UserDetail(props: any) {
       setUserPasswordData(data.password);
       setUserPhoneData(data.phone);
       setUserAddressData(data.address);
-      setUserStateData(data.state);
+      setUserStateData(data.activated);
       setUserBankData(data.bankKind);
       setUserBankAccountData(data.bankAccount);
     } catch (e) {
@@ -68,7 +68,7 @@ function UserDetail(props: any) {
         "registrant"
       );
       setUserRegistrentItemData(data.items);
-      console.log(data.items);
+      //console.log(data.items);
     } catch (e) {
       console.log(e);
     }
@@ -80,7 +80,7 @@ function UserDetail(props: any) {
         "owner"
       );
       setUserOwnerItemData(data.items);
-      console.log(data.items);
+      //console.log(data.items);
     } catch (e) {
       console.log(e);
     }
@@ -113,6 +113,8 @@ function UserDetail(props: any) {
     }
   };
 
+  //console.log("현 유저 상태는" + userStateData);
+
   return (
     <DetailBox>
       <Profile>
@@ -138,10 +140,10 @@ function UserDetail(props: any) {
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          {userStateData == "0" ? (
-            <DetailText>비활성화됨</DetailText>
-          ) : userStateData == "1" ? (
+          {userStateData == true ? (
             <DetailText>활성화됨</DetailText>
+          ) : userStateData == false ? (
+            <DetailText>비활성화됨</DetailText>
           ) : (
             <></>
           )}
@@ -155,9 +157,9 @@ function UserDetail(props: any) {
           <DetailText>{userBankAccountData}</DetailText>
         </SmallDetailBox>
         <BtnBox>
-          {userStateData == "0" ? (
+          {userStateData == false ? (
             <SubmitBtn onClick={activateUser}>유저 활성화</SubmitBtn>
-          ) : userStateData == "1" ? (
+          ) : userStateData == true ? (
             <Btn onClick={deactivateUser}>유저 비활성화</Btn>
           ) : (
             <></>
