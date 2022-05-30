@@ -44,6 +44,7 @@ function UserDetail(props: any) {
   const [userBankAccountData, setUserBankAccountData] = useState("");
   const [userOwnerItemData, setUserOwnerItemData] = useState([]);
   const [userRegistrentItemData, setUserRegistrentItemData] = useState([]);
+  const [onBtn, setOnBtn] = useState(true);
   const getUserInfomation = async () => {
     try {
       const { data } = await oneUserApi.getOneUserList(props.selectedIdx);
@@ -52,7 +53,7 @@ function UserDetail(props: any) {
       setUserPasswordData(data.password);
       setUserPhoneData(data.phone);
       setUserAddressData(data.address);
-      setUserStateData(data.auth);
+      setUserStateData(data.state);
       setUserBankData(data.bankKind);
       setUserBankAccountData(data.bankAccount);
     } catch (e) {
@@ -89,12 +90,13 @@ function UserDetail(props: any) {
     getUserInfomation();
     getUserRegistrantItemList();
     getUserOwnerItemList();
-  }, []);
+  }, [onBtn]);
 
   const activateUser = async () => {
     try {
       const { data } = await activateUserApi.activateUser(props.selectedIdx);
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }
@@ -105,6 +107,7 @@ function UserDetail(props: any) {
         props.selectedIdx
       );
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }
@@ -135,7 +138,13 @@ function UserDetail(props: any) {
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>상태</DetailName>
-          <DetailText>{userStateData}</DetailText>
+          {userStateData == "0" ? (
+            <DetailText>비활성화됨</DetailText>
+          ) : userStateData == "1" ? (
+            <DetailText>활성화됨</DetailText>
+          ) : (
+            <></>
+          )}
         </SmallDetailBox>
         <SmallDetailBox>
           <DetailName>은행</DetailName>
@@ -146,8 +155,13 @@ function UserDetail(props: any) {
           <DetailText>{userBankAccountData}</DetailText>
         </SmallDetailBox>
         <BtnBox>
-          <SubmitBtn onClick={activateUser}>유저 활성화</SubmitBtn>
-          <Btn onClick={deactivateUser}>유저 비활성화</Btn>
+          {userStateData == "0" ? (
+            <SubmitBtn onClick={activateUser}>유저 활성화</SubmitBtn>
+          ) : userStateData == "1" ? (
+            <Btn onClick={deactivateUser}>유저 비활성화</Btn>
+          ) : (
+            <></>
+          )}
         </BtnBox>
         <SmallDetailBox>
           <DetailName>아이템</DetailName>
