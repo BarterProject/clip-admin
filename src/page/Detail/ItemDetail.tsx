@@ -36,6 +36,8 @@ function ItemDetail(props: any) {
   const [stateData, setState] = useState("");
   const [deliveryData, setDeliveryData] = useState(0);
   const [registrantData, setRegistrant] = useState();
+  const [onBtn, setOnBtn] = useState(true);
+
   const getItemInfomation = async () => {
     try {
       const { data } = await oneItemApi.getOneItemList(props.selectedIdx);
@@ -55,12 +57,13 @@ function ItemDetail(props: any) {
   };
   useEffect(() => {
     getItemInfomation();
-  }, []);
+  }, [onBtn]);
 
   const activateItem = async () => {
     try {
       const { data } = await activateItemApi.activateItem(props.selectedIdx);
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }
@@ -71,6 +74,7 @@ function ItemDetail(props: any) {
         props.selectedIdx
       );
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }
@@ -80,6 +84,7 @@ function ItemDetail(props: any) {
     try {
       const { data } = await refundItemApi.refundItem(props.selectedIdx);
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }
@@ -91,6 +96,7 @@ function ItemDetail(props: any) {
         props.selectedIdx
       );
       console.log(data);
+      setOnBtn(!onBtn);
     } catch (e) {
       console.log(e);
     }

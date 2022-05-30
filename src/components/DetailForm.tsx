@@ -9,6 +9,7 @@ export const DetailBox = styled.div`
 `;
 export const Profile = styled.div`
   display: flex;
+  max-width: 400px;
   margin: 30px 0 30px 30px;
 `;
 export const ProfileImg = styled.img`
