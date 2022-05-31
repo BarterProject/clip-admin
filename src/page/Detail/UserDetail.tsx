@@ -118,7 +118,7 @@ function UserDetail(props: any) {
   return (
     <DetailBox>
       <Profile>
-        <ProfileImg />
+        {/* <ProfileImg /> */}
         <ProfileName>{userEmailData}</ProfileName>
       </Profile>
       <DetailBoxFrame>

@@ -9,8 +9,8 @@ export const DetailBox = styled.div`
 `;
 export const Profile = styled.div`
   display: flex;
-  max-width: 400px;
-  margin: 30px 0 30px 30px;
+  max-width: 300px;
+  margin: 30px 30px 30px 30px;
 `;
 export const ProfileImg = styled.img`
   width: 80px;
@@ -20,7 +20,6 @@ export const ProfileName = styled.span`
   text-align: center;
   align-self: center;
   font-size: 30px;
-  margin-left: 20px;
 `;
 export const SmallDetailBox = styled.div`
   display: flex;

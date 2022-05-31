@@ -105,7 +105,7 @@ function ItemDetail(props: any) {
   return (
     <DetailBox>
       <Profile>
-        <ProfileImg />
+        {/* <ProfileImg /> */}
         <ProfileName>{itemNameData}</ProfileName>
       </Profile>
       <DetailBoxFrame>
@@ -154,7 +154,8 @@ function ItemDetail(props: any) {
         <SmallDetailBox>
           <DetailName>실 제품 소유자</DetailName>
           <DetailName>{registrantData}</DetailName>
-          <ProfileImg />
+          {/* 
+          <ProfileImg /> */}
         </SmallDetailBox>
         <BtnBox>
           {stateData == "0" ? (
