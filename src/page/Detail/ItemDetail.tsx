@@ -1,6 +1,7 @@
 import {
   activateItemApi,
   deactivateItemApi,
+  getImageApi,
   oneItemApi,
   refundItemApi,
   returnDepositItemApi,
@@ -9,6 +10,7 @@ import { selectedItemNumber } from "atoms";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { isConstructSignatureDeclaration } from "typescript";
 
 import {
   DetailBox,
@@ -55,6 +57,7 @@ function ItemDetail(props: any) {
       console.log(e);
     }
   };
+
   useEffect(() => {
     getItemInfomation();
   }, [onBtn]);
@@ -105,7 +108,9 @@ function ItemDetail(props: any) {
   return (
     <DetailBox>
       <Profile>
-        {/* <ProfileImg /> */}
+        <ProfileImg
+          src={`${process.env.REACT_APP_BASE_URL}/api/v2/items/images/${oneItemData?.images[0].name}`}
+        />
         <ProfileName>{itemNameData}</ProfileName>
       </Profile>
       <DetailBoxFrame>

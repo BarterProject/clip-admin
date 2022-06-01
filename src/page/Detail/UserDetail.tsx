@@ -1,6 +1,7 @@
 import {
   activateUserApi,
   deactivateUserApi,
+  getImageApi,
   oneUserApi,
   userItemSearchApi,
 } from "api";
@@ -45,6 +46,7 @@ function UserDetail(props: any) {
   const [userOwnerItemData, setUserOwnerItemData] = useState([]);
   const [userRegistrentItemData, setUserRegistrentItemData] = useState([]);
   const [onBtn, setOnBtn] = useState(true);
+
   const getUserInfomation = async () => {
     try {
       const { data } = await oneUserApi.getOneUserList(props.selectedIdx);
@@ -56,6 +58,8 @@ function UserDetail(props: any) {
       setUserStateData(data.activated);
       setUserBankData(data.bankKind);
       setUserBankAccountData(data.bankAccount);
+      //console.log(data.images[0].name);
+      //setUserImgName(data.images[0].name);
     } catch (e) {
       console.log(e);
     }
@@ -85,11 +89,22 @@ function UserDetail(props: any) {
       console.log(e);
     }
   };
+  /* 
+  const getUserImg = async () => {
+    try {
+      const { data } = await getImageApi.getImg(userImgName);
+      console.log(data + "dasd");
+      setUserImg(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }; */
 
   useEffect(() => {
     getUserInfomation();
     getUserRegistrantItemList();
     getUserOwnerItemList();
+    //getUserImg();
   }, [onBtn]);
 
   const activateUser = async () => {

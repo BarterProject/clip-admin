@@ -206,3 +206,10 @@ export const completeReportApi = {
     return api.put(`/api/v2/items/reports/${idx}/complete`);
   },
 };
+
+//item img
+export const getImageApi = {
+  getImg(name: string): Promise<AxiosResponse<any>> {
+    return api.get(`/api/v2/items/images/${name}`);
+  },
+};
