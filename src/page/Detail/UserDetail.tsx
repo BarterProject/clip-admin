@@ -22,6 +22,7 @@ import {
 } from "components/DetailForm";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { userType } from "types";
 
 const ItemList = styled.div``;
 const UserItemBox = styled.div`
@@ -36,7 +37,9 @@ const UserItemBox = styled.div`
 `;
 
 function UserDetail(props: any) {
+  const [oneUserData, setOneUserData] = useState<userType>();
   const [userEmailData, setUserEmailData] = useState("");
+  const [userImageData, setUserImageData] = useState("");
   const [userPasswordData, setUserPasswordData] = useState("");
   const [userPhoneData, setUserPhoneData] = useState("");
   const [userAddressData, setUserAddressData] = useState("");
@@ -51,6 +54,8 @@ function UserDetail(props: any) {
     try {
       const { data } = await oneUserApi.getOneUserList(props.selectedIdx);
       console.log(data);
+      setOneUserData(data);
+      setUserImageData(data.image?.name);
       setUserEmailData(data.email);
       setUserPasswordData(data.password);
       setUserPhoneData(data.phone);
@@ -60,6 +65,7 @@ function UserDetail(props: any) {
       setUserBankAccountData(data.bankAccount);
       //console.log(data.images[0].name);
       //setUserImgName(data.images[0].name);
+      console.log("유저이미지데이터:" + userImageData);
     } catch (e) {
       console.log(e);
     }
@@ -133,7 +139,9 @@ function UserDetail(props: any) {
   return (
     <DetailBox>
       <Profile>
-        {/* <ProfileImg /> */}
+        <ProfileImg
+          src={`${process.env.REACT_APP_BASE_URL}/api/v2/user/image/${userImageData}`}
+        />
         <ProfileName>{userEmailData}</ProfileName>
       </Profile>
       <DetailBoxFrame>

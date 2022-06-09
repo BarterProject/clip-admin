@@ -13,15 +13,15 @@ export type deliveryType = {
 };
 
 export type imageType = {
-  createdAt: Date;
-  extension: string;
-  idx: number;
-  name: string;
-  number: number;
-  originalName: string;
-  saveName: string;
-  size: number;
-  uploadPath: string;
+  createdAt?: Date;
+  extension?: string;
+  idx?: number;
+  name?: string;
+  number?: number;
+  originalName?: string;
+  saveName?: string;
+  size?: number;
+  uploadPath?: string;
 };
 
 export type userType = {
@@ -36,6 +36,7 @@ export type userType = {
   oauth: string;
   password: string;
   phone: string;
+  image: imageType[];
 };
 export type itemType = {
   clause_agree: boolean;
